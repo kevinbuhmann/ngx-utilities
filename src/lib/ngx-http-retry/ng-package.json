@@ -1,0 +1,11 @@
+{
+  "$schema": "./../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "./../../../dist/lib/ngx-http-retry",
+  "lib": {
+    "entryFile": "public_api.ts",
+    "languageLevel": [
+      "dom",
+      "es2017"
+    ]
+  }
+}

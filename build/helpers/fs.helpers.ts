@@ -21,3 +21,7 @@ export function walkDirectory(directoryPath: string, visitFile: (filePath: strin
 export function readFile(filePath: string) {
   return fs.readFileSync(filePath).toString();
 }
+
+export function readDirectory(directoryPath: string) {
+  return fs.readdirSync(directoryPath);
+}

@@ -9,6 +9,7 @@ const defaultOptionsFn = () => ({
   clean: true,
   lint: true,
   test: true,
+  package: true,
   travis: false
 });
 
@@ -27,9 +28,14 @@ const travisNoProgressArg = options.travis ? '--no-progress' : '';
   }
 
   await execute(`ng build --prod ${travisNoProgressArg}`);
+  await execute('webpack --config ./build/webpack/webpack.server.ts --progress');
 
   if (options.test) {
     await execute(`ts-node ./build/test.ts ${travisArg}`);
+  }
+
+  if (options.package) {
+    await execute('ts-node ./build/package.ts');
   }
 })();
 

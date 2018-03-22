@@ -3,6 +3,7 @@
     "node_modules/codelyzer",
     "node_modules/custom-tslint-rules/dist",
     "node_modules/rxjs-tslint-rules/dist/rules",
+    "node_modules/subscription-tracker/dist/tslint-rules",
     "tslint-consistent-codestyle"
   ],
   "rules": {
@@ -139,6 +140,9 @@
     "use-default-type-parameter": true,
     "use-isnan": true,
     "variable-name": false,
+
+    // subscription tracker
+    "no-subscribe": true,
 
     // tslint-consistent-codestyle
     "no-accessor-recursion": true,
