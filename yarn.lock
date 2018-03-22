@@ -27,12 +27,6 @@
     "@ngtools/json-schema" "^1.1.0"
     rxjs "^5.5.6"
 
-"@angular/animations@5.2.9":
-  version "5.2.9"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-5.2.9.tgz#220db9fb5a52a193db0023d721b23ddd25a75770"
-  dependencies:
-    tslib "^1.7.1"
-
 "@angular/cli@1.7.3":
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-1.7.3.tgz#ac917b69240bb1b340421e9f985135890e0d53b4"
@@ -122,18 +116,6 @@
 "@angular/core@5.2.9":
   version "5.2.9"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.9.tgz#3daf13ef9aa754b9954ed21da3eb322e8b20f667"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/forms@5.2.9":
-  version "5.2.9"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.2.9.tgz#12c45b3a02c398b354f09cc740d914cd904c0c9c"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/http@5.2.9":
-  version "5.2.9"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-5.2.9.tgz#2ffea536e181bc97e2867593d57425ea7853285b"
   dependencies:
     tslib "^1.7.1"
 
