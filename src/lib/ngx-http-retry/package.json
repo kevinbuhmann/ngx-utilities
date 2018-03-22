@@ -1,6 +1,6 @@
 {
   "name": "ngx-http-retry",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "https://github.com/kevinphelps/ngx-libraries",
   "author": "Kevin Phelps",
   "license": "MIT",
