@@ -59,12 +59,12 @@ import { NetworkStatusService } from './../services/network-status.service';
 
 @Injectable()
 export class NetworkErrorRetryStrategy implements HttpRequestRetryStrategy {
-  // status code 0 mean there was a network error (e.g. a timeout)
+  // status code 0 means there was a network error (e.g. a timeout)
   readonly statuses = [0];
   readonly maxCount = 3;
 
   delayFn(retryNumber: number) {
-    // retry immediately, wait 3000, and then stop due the max count
+    // retry immediately, wait 3 seconds and try again, and then stop due the max count
     return retryNumber === 1 ? 0 : 3000;
   }
 
@@ -137,7 +137,7 @@ export class MyComponent implements OnInit {
   constructor(private readonly httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get('/some/url').pipe(httpRequestRetry(requestStrategies)).subscribe();
+    this.httpClient.get('/some/url').pipe(httpRequestRetry(retryStrategies)).subscribe();
   }
 }
 ```
