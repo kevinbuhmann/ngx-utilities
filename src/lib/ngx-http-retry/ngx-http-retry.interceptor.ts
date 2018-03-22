@@ -7,7 +7,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { HTTP_REQUEST_RETRY_STRATEGIES } from './ngx-http-retry.di-tokens';
 import { httpRequestRetry, HttpRequestRetryStrategy } from './ngx-http-retry.helpers';
 
-const attemptNumberHeader = 'X-Request-Attempt-Number';
+export const attemptNumberHeader = 'X-Request-Attempt-Number';
 
 @Injectable()
 export class NgxHttpRetryInterceptor implements HttpInterceptor {
