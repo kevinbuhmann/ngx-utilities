@@ -16,7 +16,7 @@ export class NgxHttpRetryInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     let result: Observable<HttpEvent<any>>;
 
-    if (request.method.toUpperCase() === 'GET') {
+    if (this.retryStrategies.length && request.method.toUpperCase() === 'GET') {
       let attemptNumber = 0;
 
       result = of(undefined).pipe(
