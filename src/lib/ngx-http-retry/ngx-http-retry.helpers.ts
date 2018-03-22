@@ -4,6 +4,8 @@ import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 import { delay, retryWhen, switchMap } from 'rxjs/operators';
 
+import { httpRetryFailuresSubject } from './ngx-http-retry.service';
+
 export interface HttpRequestRetryStrategy {
   statuses: number[];
   maxCount: number;
@@ -26,8 +28,12 @@ export function httpRequestRetry(retryStrategies: HttpRequestRetryStrategy[]) {
           const shouldRetry = retryStrategy && counts[retryStrategyIndex] < retryStrategy.maxCount;
           const retryDelay = retryStrategy && retryStrategy.delayFn ? retryStrategy.delayFn(counts[retryStrategyIndex]) : 0;
 
-          if (!shouldRetry && retryStrategy && retryStrategy.onFailure) {
-            retryStrategy.onFailure(error);
+          if (!shouldRetry && retryStrategy) {
+            httpRetryFailuresSubject.next(error);
+
+            if (retryStrategy.onFailure) {
+              retryStrategy.onFailure(error);
+            }
           }
 
           return shouldRetry ? of(error).pipe(delay(retryDelay)) : _throw(error);

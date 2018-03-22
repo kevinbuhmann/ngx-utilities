@@ -1,8 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-
-import { HttpErrorResponse } from '@angular/common/http';
 
 export const httpRetryFailuresSubject = new Subject<HttpErrorResponse>();
 
