@@ -16,7 +16,7 @@ const defaultOptionsFn = () => ({
 const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 
 const travisArg = options.travis ? '--travis' : '';
-const travisNoProgressArg = options.travis ? '--no-progress' : '';
+const progressArg = options.travis ? '--no-progress' : '--progress';
 
 (async () => {
   if (options.clean) {
@@ -27,8 +27,8 @@ const travisNoProgressArg = options.travis ? '--no-progress' : '';
     await execute('ts-node ./build/lint.ts');
   }
 
-  await execute(`ng build --prod ${travisNoProgressArg}`);
-  await execute('webpack --config ./build/webpack/webpack.server.ts --progress');
+  await execute(`ng build --prod ${progressArg}`);
+  await execute(`webpack --config ./build/webpack/webpack.server.ts ${progressArg}`);
 
   if (options.test) {
     await execute(`ts-node ./build/test.ts ${travisArg}`);
