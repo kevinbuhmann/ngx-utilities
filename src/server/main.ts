@@ -9,14 +9,19 @@ import * as morgan from 'morgan';
 import { registerController } from 'rx-routes';
 
 import { MockErrorsController } from './controllers/mock-errors.controller';
+import { StaticFilesController } from './controllers/static-files.controller';
+import { FileCacheService } from './services/file-cache.service';
 
-const port = 4300;
+const port = process.env.PORT || 4300;
 
 process.on('uncaughtException', handleFatalError);
 process.on('unhandledRejection', handleFatalError);
 
 (async () => {
+  const fileCacheService = new FileCacheService();
+
   const mockErrorsController = new MockErrorsController();
+  const staticFilesController = new StaticFilesController(fileCacheService);
 
   const app = express();
   const server = http.createServer(app);
@@ -24,6 +29,7 @@ process.on('unhandledRejection', handleFatalError);
   app.use(morgan('dev'));
 
   registerController(app, mockErrorsController);
+  registerController(app, staticFilesController);
 
   server.listen(port, async () => {
     console.log(`listening on port ${port}.`);

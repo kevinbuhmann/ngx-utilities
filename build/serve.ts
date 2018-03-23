@@ -5,16 +5,17 @@ import * as rimraf from 'rimraf';
 import { execute } from './helpers/shell.helpers';
 import { bail } from './helpers/utility.helpers';
 
+const indexFilePath = './dist/app/index.html';
 const serverFilePath = './dist/server/server.js';
 
 (async () => {
   clean();
 
-  const ngServe = execute('ng serve --proxy-config proxy.conf.json');
+  const ngBuild = execute('ng build --watch');
   const buildServer = execute('webpack --config ./build/webpack/webpack.server.ts --progress --watch');
-  const runServer = waitForServerJsToExist().then(() => execute(`nodemon ${serverFilePath}`));
+  const runServer = waitForServerToBeReady().then(() => execute(`nodemon ${serverFilePath}`));
 
-  await Promise.all([ngServe, buildServer, runServer]);
+  await Promise.all([ngBuild, buildServer, runServer]);
 })();
 
 function clean() {
@@ -28,12 +29,12 @@ function clean() {
   }
 }
 
-function waitForServerJsToExist() {
+function waitForServerToBeReady() {
   return new Promise<void>(resolve => {
     const interval = setInterval(() => {
-      const fileExists = fs.existsSync(serverFilePath);
+      const filesExist = [indexFilePath, serverFilePath].every(filePath => fs.existsSync(filePath));
 
-      if (fileExists) {
+      if (filesExist) {
         clearInterval(interval);
         resolve();
       }

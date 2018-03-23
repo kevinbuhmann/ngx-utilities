@@ -8,7 +8,8 @@
     "build": "ts-node ./build/build.ts",
     "test": "ts-node ./build/test.ts",
     "lint": "ts-node ./build/lint.ts",
-    "package": "ts-node ./build/package.ts"
+    "package": "ts-node ./build/package.ts",
+    "heroku-postbuild": "yarn run build --no-test --no-package"
   },
   "dependencies": {
     "@angular/common": "5.2.9",
