@@ -1,0 +1,7 @@
+<div class="code-example">
+  <pre [class]="'language-' + language">
+    <code [class]="'language-' + language" [innerHTML]="highlightedHtml"></code>
+  </pre>
+
+  <span #content class="display-none" hidden><ng-content></ng-content></span>
+</div>

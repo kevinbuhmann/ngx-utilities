@@ -4,9 +4,12 @@
 
 <ngx-nav-drawer [(open)]="show" [fixed]="true">
   <a routerLink="/">Home</a>
+  <a routerLink="/docs/ngx-github-corner">ngx-github-corner</a>
   <a routerLink="/docs/ngx-http-retry">ngx-http-retry</a>
 </ngx-nav-drawer>
 
 <main>
   <router-outlet></router-outlet>
 </main>
+
+<ngx-github-corner class="right" color="#fff" fill="#151513" url="https://github.com/kevinphelps/ngx-libraries"></ngx-github-corner>
