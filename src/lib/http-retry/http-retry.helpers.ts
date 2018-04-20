@@ -4,7 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 import { delay, retryWhen, switchMap } from 'rxjs/operators';
 
-import { httpRetryFailuresSubject } from './ngx-http-retry.service';
+import { httpRetryFailuresSubject } from './http-retry.service';
 
 export interface HttpRequestRetryStrategy {
   statuses: number[];

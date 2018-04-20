@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { HTTP_REQUEST_RETRY_STRATEGIES } from './ngx-http-retry.di-tokens';
-import { httpRequestRetry, HttpRequestRetryStrategy } from './ngx-http-retry.helpers';
+import { HTTP_REQUEST_RETRY_STRATEGIES } from './http-retry.di-tokens';
+import { httpRequestRetry, HttpRequestRetryStrategy } from './http-retry.helpers';
 
 export const attemptNumberHeader = 'X-Request-Attempt-Number';
 
 @Injectable()
-export class NgxHttpRetryInterceptor implements HttpInterceptor {
+export class HttpRetryInterceptor implements HttpInterceptor {
   constructor(@Inject(HTTP_REQUEST_RETRY_STRATEGIES) private retryStrategies: HttpRequestRetryStrategy[]) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
@@ -34,9 +34,9 @@ export class NgxHttpRetryInterceptor implements HttpInterceptor {
   }
 }
 
-export const ngxHttpRetryInterceptorProvider: Provider = {
+export const httpRetryInterceptorProvider: Provider = {
   provide: HTTP_INTERCEPTORS,
-  useClass: NgxHttpRetryInterceptor,
+  useClass: HttpRetryInterceptor,
   multi: true
 };
 

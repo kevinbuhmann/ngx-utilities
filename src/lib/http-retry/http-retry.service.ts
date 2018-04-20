@@ -6,7 +6,7 @@ import { Subject } from 'rxjs/Subject';
 export const httpRetryFailuresSubject = new Subject<HttpErrorResponse>();
 
 @Injectable()
-export class NgxHttpRetryService {
+export class HttpRetryService {
   readonly httpRetryFailures: Observable<HttpErrorResponse>;
 
   constructor() {

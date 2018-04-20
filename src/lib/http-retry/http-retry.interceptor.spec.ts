@@ -4,9 +4,9 @@ import { Injectable, Provider } from '@angular/core';
 import { async, inject, TestBed } from '@angular/core/testing';
 import { TestingSubscriptionTracker } from 'subscription-tracker';
 
-import { HTTP_REQUEST_RETRY_STRATEGIES } from './ngx-http-retry.di-tokens';
-import { HttpRequestRetryStrategy } from './ngx-http-retry.helpers';
-import { attemptNumberHeader, ngxHttpRetryInterceptorProvider } from './ngx-http-retry.interceptor';
+import { HTTP_REQUEST_RETRY_STRATEGIES } from './http-retry.di-tokens';
+import { HttpRequestRetryStrategy } from './http-retry.helpers';
+import { attemptNumberHeader, httpRetryInterceptorProvider } from './http-retry.interceptor';
 
 @Injectable()
 export class ServerUnavailableRetryStrategy implements HttpRequestRetryStrategy {
@@ -25,13 +25,13 @@ export const serverUnavailableRetryStrategyProvider: Provider = {
   multi: true
 };
 
-describe('NgxHttpRetryInterceptor', () => {
+describe('HttpRetryInterceptor', () => {
   const subscriptionTracker = new TestingSubscriptionTracker();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ngxHttpRetryInterceptorProvider, serverUnavailableRetryStrategyProvider]
+      providers: [httpRetryInterceptorProvider, serverUnavailableRetryStrategyProvider]
     });
   });
 

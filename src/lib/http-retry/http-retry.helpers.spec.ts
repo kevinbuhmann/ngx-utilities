@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@an
 import { async, inject, TestBed } from '@angular/core/testing';
 import { TestingSubscriptionTracker } from 'subscription-tracker';
 
-import { httpRequestRetry, HttpRequestRetryStrategy } from './ngx-http-retry.helpers';
+import { httpRequestRetry, HttpRequestRetryStrategy } from './http-retry.helpers';
 
 describe('httpRequestRetry', () => {
   const subscriptionTracker = new TestingSubscriptionTracker();

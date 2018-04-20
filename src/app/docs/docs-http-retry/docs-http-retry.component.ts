@@ -4,19 +4,19 @@ import { Observable } from 'rxjs/Observable';
 import { scan } from 'rxjs/operators';
 import { SubscriptionTrackerBaseComponent } from 'subscription-tracker';
 
-import { NgxHttpRetryService } from './../../../lib/ngx-http-retry/public_api';
+import { HttpRetryService } from './../../../lib/http-retry/public_api';
 
 @Component({
-  selector: 'app-docs-ngx-http-retry',
-  templateUrl: './docs-ngx-http-retry.component.html'
+  selector: 'app-docs-http-retry',
+  templateUrl: './docs-http-retry.component.html'
 })
-export class DocsNgxHttpRetryComponent extends SubscriptionTrackerBaseComponent implements OnInit {
+export class DocsHttpRetryComponent extends SubscriptionTrackerBaseComponent implements OnInit {
   readonly httpRetryFailures: Observable<string[]>;
 
-  constructor(private readonly httpClient: HttpClient, private readonly ngxHttpRetryService: NgxHttpRetryService) {
+  constructor(private readonly httpClient: HttpClient, private readonly httpRetryService: HttpRetryService) {
     super();
 
-    this.httpRetryFailures = this.ngxHttpRetryService.httpRetryFailures.pipe(
+    this.httpRetryFailures = this.httpRetryService.httpRetryFailures.pipe(
       scan<HttpErrorResponse, string[]>((messages, error) => [...messages, getErrorMessage(error)], [])
     );
   }

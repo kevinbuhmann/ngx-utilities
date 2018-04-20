@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ngx-libraries App', () => {
+describe('ngx-utilities App', () => {
   let page: AppPage;
 
   beforeEach(() => {

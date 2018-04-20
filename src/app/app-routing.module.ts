@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DocsNgxHttpRetryComponent } from './docs/docs-ngx-http-retry/docs-ngx-http-retry.component';
+import { DocsHttpRetryComponent } from './docs/docs-http-retry/docs-http-retry.component';
 import { HomeComponent } from './home/home.component';
 
-export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'docs/ngx-http-retry', component: DocsNgxHttpRetryComponent }
-];
+export const routes: Routes = [{ path: '', component: HomeComponent }, { path: 'docs/http-retry', component: DocsHttpRetryComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

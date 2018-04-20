@@ -1,6 +1,6 @@
-# ngx-http-retry
+# http-retry
 
-[![npm version](https://badge.fury.io/js/ngx-http-retry.svg)](https://badge.fury.io/js/ngx-http-retry)
+[![npm version](https://badge.fury.io/js/%40ngx-utilities%2Fhttp-retry.svg)](https://badge.fury.io/js/%40ngx-utilities%2Fhttp-retry)
 
 A configurable Angular HTTP interceptor to retry GET requests and respond to errors and flaky
 connections.
@@ -9,18 +9,18 @@ connections.
 
 To install this library, run:
 
-`npm install ngx-http-retry --save` -or- `yarn add ngx-http-retry`
+`npm install http-retry --save` -or- `yarn add http-retry`
 
-and then import `NgxHttpRetryModule` it in your Angular `AppModule`:
+and then import `HttpRetryModule` it in your Angular `AppModule`:
 
 ```typescript
 // app.module.ts
 
-import { NgxHttpRetryModule } from 'ngx-http-retry';
+import { HttpRetryModule } from 'http-retry';
 
 @NgModule({
   imports: [
-    NgxHttpRetryModule.forRoot()
+    HttpRetryModule.forRoot()
   ],
   providers: [
     networkErrorRetryStrategyProvider,
@@ -34,26 +34,26 @@ export class AppModule { }
 
 ## Usage
 
-You configure `ngx-http-retry` by providing (via Angular dependency injection) a collection of
+You configure `http-retry` by providing (via Angular dependency injection) a collection of
 injectable classes that implement the `HttpRequestRetryStrategy` interface. These "retry strategies"
-tell `ngx-http-retry` which status codes to retry, how many times to retry, and when to stop
-retrying. The global HTTP interceptor provided by `NgxHttpRetryModule` will do nothing if you do not
+tell `http-retry` which status codes to retry, how many times to retry, and when to stop
+retrying. The global HTTP interceptor provided by `HttpRetryModule` will do nothing if you do not
 provide any retry strategies.
 
 In addition to being thrown by the http request observable like normal, the last `HttpErrorResponse`
-received when `ngx-http-retry` stops retrying a request is passed to the retry strategy's `onFailure`
-method and emitted on the `NgxHttpRetryService`'s `httpRetryFailures` observable.
+received when `http-retry` stops retrying a request is passed to the retry strategy's `onFailure`
+method and emitted on the `HttpRetryService`'s `httpRetryFailures` observable.
 
 ### Implementing `HttpRequestRetryStrategy`
 
 ```typescript
 // network-error.retry-strategy.ts
 
-import { HttpRequestRetryStrategy } from 'ngx-http-retry';
+import { HttpRequestRetryStrategy } from 'http-retry';
 
 @Injectable()
 import { Injectable, Provider } from '@angular/core';
-import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from 'ngx-http-retry';
+import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from 'http-retry';
 
 import { NetworkStatusService } from './../services/network-status.service';
 
@@ -105,18 +105,18 @@ export const serverUnavailableRetryStrategyProvider: Provider = {
 };
 ```
 
-### Using `NgxHttpRetryService` (optional)
+### Using `HttpRetryService` (optional)
 
 ```typescript
 // my.component.ts
 
-import { NgxHttpRetryService } from 'ngx-http-retry';
+import { HttpRetryService } from 'http-retry';
 
 export class MyComponent implements OnInit {
-  constructor(private readonly ngxHttpRetryService: NgxHttpRetryService) { }
+  constructor(private readonly httpRetryService: HttpRetryService) { }
 
   ngOnInit() {
-    this.ngxHttpRetryService.httpRetryFailures.subscribe(error => {
+    this.httpRetryService.httpRetryFailures.subscribe(error => {
       console.log('global http retry error listener', error.status, error.url);
     });
   }
@@ -128,10 +128,10 @@ export class MyComponent implements OnInit {
 The core functionality of this library is exposed as a RxJS operator that takes an an array of
 retry strategies which can be instances of classes or plain objects that implement the
 `HttpRequestRetryStrategy` interface. You can use this operator directly if you do not wish to use
-the global interceptor provided by `NgxHttpRetryModule`.
+the global interceptor provided by `HttpRetryModule`.
 
 ```typescript
-import { httpRequestRetry } from 'ngx-http-retry';
+import { httpRequestRetry } from 'http-retry';
 
 export class MyComponent implements OnInit {
   constructor(private readonly httpClient: HttpClient) { }
@@ -144,7 +144,7 @@ export class MyComponent implements OnInit {
 
 ### Request Headers
 
-`ngx-http-retry` will add a header named `X-Request-Attempt-Number` to each request it sends that
+`http-retry` will add a header named `X-Request-Attempt-Number` to each request it sends that
 with the number of the current attempt. This was added primarily for testing. But it's plausible
 that this could be useful information to track on the server in some scenarios, so this header is
 added in production. A future version may allow disabling this option if needed.

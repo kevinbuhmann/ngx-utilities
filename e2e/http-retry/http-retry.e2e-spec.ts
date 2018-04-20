@@ -1,17 +1,17 @@
 import { browser } from 'protractor';
 
-import { NgxHttpRetryClickPage } from './ngx-http-retry.po';
+import { HttpRetryPage } from './http-retry.po';
 
-describe('ngx-http-retry', () => {
-  let page: NgxHttpRetryClickPage;
+describe('http-retry', () => {
+  let page: HttpRetryPage;
 
   beforeEach(() => {
-    page = new NgxHttpRetryClickPage();
+    page = new HttpRetryPage();
   });
 
   it('should display heading', () => {
     page.navigateTo();
-    expect(page.getPageHeading()).toEqual('ngx-http-retry');
+    expect(page.getPageHeading()).toEqual('@ngx-utilities/http-retry');
   });
 
   it('should show the error message after retrying', () => {

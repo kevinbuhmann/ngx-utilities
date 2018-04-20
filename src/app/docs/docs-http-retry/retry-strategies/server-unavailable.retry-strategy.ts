@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
 
-import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from './../../../../lib/ngx-http-retry/public_api';
+import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from './../../../../lib/http-retry/public_api';
 
 @Injectable()
 export class ServerUnavailableRetryStrategy implements HttpRequestRetryStrategy {
@@ -13,7 +13,7 @@ export class ServerUnavailableRetryStrategy implements HttpRequestRetryStrategy 
   }
 
   onFailure(error: HttpErrorResponse) {
-    console.log('When ngx-http-retry stops retrying, the final error is passed back to retry strategy...', error.status, error.url);
+    console.log('When http-retry stops retrying, the final error is passed back to retry strategy...', error.status, error.url);
   }
 }
 
