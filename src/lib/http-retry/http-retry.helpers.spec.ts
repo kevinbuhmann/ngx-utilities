@@ -1,21 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { async, inject, TestBed } from '@angular/core/testing';
-import { TestingSubscriptionTracker } from 'subscription-tracker';
 
 import { httpRequestRetry, HttpRequestRetryStrategy } from './http-retry.helpers';
 
 describe('httpRequestRetry', () => {
-  const subscriptionTracker = new TestingSubscriptionTracker();
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-  });
-
-  afterEach(() => {
-    subscriptionTracker.destroy();
   });
 
   afterEach(
@@ -36,7 +29,7 @@ describe('httpRequestRetry', () => {
         httpClient
           .get('/api/people')
           .pipe(httpRequestRetry([retryStrategy]))
-          .subscribeAndTrack(subscriptionTracker);
+          .subscribe();
 
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 502, statusText: 'Bad Gateway' });
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 200, statusText: 'OK' });
@@ -60,7 +53,7 @@ describe('httpRequestRetry', () => {
         httpClient
           .get('/api/people')
           .pipe(httpRequestRetry([retryStrategy]))
-          .subscribeAndTrack(subscriptionTracker);
+          .subscribe();
 
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 502, statusText: 'Bad Gateway' });
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 502, statusText: 'Bad Gateway' });
@@ -89,7 +82,7 @@ describe('httpRequestRetry', () => {
         httpClient
           .get('/api/people')
           .pipe(httpRequestRetry([retryStrategy]))
-          .subscribeAndTrack(subscriptionTracker, undefined, error => {
+          .subscribe(undefined, error => {
             expect(error.status).toBe(502);
           });
 
@@ -117,7 +110,7 @@ describe('httpRequestRetry', () => {
         httpClient
           .get('/api/people')
           .pipe(httpRequestRetry([retryStrategy]))
-          .subscribeAndTrack(subscriptionTracker);
+          .subscribe();
 
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 502, statusText: 'Bad Gateway' });
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 503, statusText: 'Service Unavailable' });
@@ -147,7 +140,7 @@ describe('httpRequestRetry', () => {
         httpClient
           .get('/api/people')
           .pipe(httpRequestRetry([retryStrategy1, retryStrategy2]))
-          .subscribeAndTrack(subscriptionTracker);
+          .subscribe();
 
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 502, statusText: 'Bad Gateway' });
         (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 503, statusText: 'Service Unavailable' });
@@ -179,7 +172,7 @@ describe('httpRequestRetry', () => {
         httpClient
           .get('/api/people')
           .pipe(httpRequestRetry([retryStrategy1, retryStrategy2]))
-          .subscribeAndTrack(subscriptionTracker, undefined, error => {
+          .subscribe(undefined, error => {
             expect(error.status).toBe(0);
           });
 
@@ -211,7 +204,7 @@ describe('httpRequestRetry', () => {
         httpClient
           .get('/api/people')
           .pipe(httpRequestRetry([retryStrategy1, retryStrategy2]))
-          .subscribeAndTrack(subscriptionTracker, undefined, error => {
+          .subscribe(undefined, error => {
             expect(error.status).toBe(500);
           });
 

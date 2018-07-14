@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { Injectable, Provider } from '@angular/core';
 import { async, inject, TestBed } from '@angular/core/testing';
-import { TestingSubscriptionTracker } from 'subscription-tracker';
 
 import { HTTP_REQUEST_RETRY_STRATEGIES } from './http-retry.di-tokens';
 import { HttpRequestRetryStrategy } from './http-retry.helpers';
@@ -26,17 +25,11 @@ export const serverUnavailableRetryStrategyProvider: Provider = {
 };
 
 describe('HttpRetryInterceptor', () => {
-  const subscriptionTracker = new TestingSubscriptionTracker();
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [httpRetryInterceptorProvider, serverUnavailableRetryStrategyProvider]
     });
-  });
-
-  afterEach(() => {
-    subscriptionTracker.destroy();
   });
 
   afterEach(
@@ -49,7 +42,7 @@ describe('HttpRetryInterceptor', () => {
     'should send the correct attempt number header',
     async(
       inject([HttpClient, HttpTestingController], async (httpClient: HttpClient, httpMock: HttpTestingController) => {
-        httpClient.get('/api/people').subscribeAndTrack(subscriptionTracker);
+        httpClient.get('/api/people').subscribe();
 
         (await expectOneRequest(httpMock, '/api/people', 1)).flush(null, { status: 502, statusText: 'Bad Gateway' });
         (await expectOneRequest(httpMock, '/api/people', 2)).flush(null, { status: 502, statusText: 'Bad Gateway' });
