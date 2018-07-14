@@ -1,11 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable, Subject } from 'rxjs';
 
 export const httpRetryFailuresSubject = new Subject<HttpErrorResponse>();
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HttpRetryService {
   readonly httpRetryFailures: Observable<HttpErrorResponse>;
 

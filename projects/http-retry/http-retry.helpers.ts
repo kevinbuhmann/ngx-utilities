@@ -1,7 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { _throw } from 'rxjs/observable/throw';
+import { of, throwError, Observable } from 'rxjs';
 import { delay, retryWhen, switchMap } from 'rxjs/operators';
 
 import { httpRetryFailuresSubject } from './http-retry.service';
@@ -36,7 +34,7 @@ export function httpRequestRetry(retryStrategies: HttpRequestRetryStrategy[]) {
             }
           }
 
-          return shouldRetry ? of(error).pipe(delay(retryDelay)) : _throw(error);
+          return shouldRetry ? of(error).pipe(delay(retryDelay)) : throwError(error);
         }
       })
     );

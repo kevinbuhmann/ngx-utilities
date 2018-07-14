@@ -32,26 +32,21 @@ describe('HttpRetryInterceptor', () => {
     });
   });
 
-  afterEach(
-    inject([HttpTestingController], (httpMock: HttpTestingController) => {
-      httpMock.verify();
+  afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
+    httpMock.verify();
+  }));
+
+  it('should send the correct attempt number header', async(
+    inject([HttpClient, HttpTestingController], async (httpClient: HttpClient, httpMock: HttpTestingController) => {
+      httpClient.get('/api/people').subscribe();
+
+      (await expectOneRequest(httpMock, '/api/people', 1)).flush(null, { status: 502, statusText: 'Bad Gateway' });
+      (await expectOneRequest(httpMock, '/api/people', 2)).flush(null, { status: 502, statusText: 'Bad Gateway' });
+      (await expectOneRequest(httpMock, '/api/people', 3)).flush(null, { status: 502, statusText: 'Bad Gateway' });
+      (await expectOneRequest(httpMock, '/api/people', 4)).flush(null, { status: 502, statusText: 'Bad Gateway' });
+      (await expectOneRequest(httpMock, '/api/people', 5)).flush(null, { status: 200, statusText: 'OK' });
     })
-  );
-
-  it(
-    'should send the correct attempt number header',
-    async(
-      inject([HttpClient, HttpTestingController], async (httpClient: HttpClient, httpMock: HttpTestingController) => {
-        httpClient.get('/api/people').subscribe();
-
-        (await expectOneRequest(httpMock, '/api/people', 1)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-        (await expectOneRequest(httpMock, '/api/people', 2)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-        (await expectOneRequest(httpMock, '/api/people', 3)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-        (await expectOneRequest(httpMock, '/api/people', 4)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-        (await expectOneRequest(httpMock, '/api/people', 5)).flush(null, { status: 200, statusText: 'OK' });
-      })
-    )
-  );
+  ));
 });
 
 function expectOneRequest(httpMock: HttpTestingController, url: string, expectedAttemptNumber?: number) {

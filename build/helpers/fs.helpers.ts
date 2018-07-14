@@ -25,3 +25,7 @@ export function readFile(filePath: string) {
 export function readDirectory(directoryPath: string) {
   return fs.readdirSync(directoryPath);
 }
+
+export function isDirectory(directoryPath: string) {
+  return fs.lstatSync(directoryPath).isDirectory();
+}

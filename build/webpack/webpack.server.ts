@@ -1,9 +1,10 @@
 import * as path from 'path';
+import * as webpack from 'webpack';
 import * as webpackNodeExternals from 'webpack-node-externals';
 
-// tslint:disable-next-line:no-default-export
-export default {
+const configuration: webpack.Configuration = {
   target: 'node',
+  mode: 'production',
   devtool: 'source-map',
   externals: [webpackNodeExternals()],
   entry: {
@@ -27,5 +28,11 @@ export default {
         loader: 'ts-loader'
       }
     ]
+  },
+  optimization: {
+    minimize: false
   }
 };
+
+// tslint:disable-next-line:no-default-export
+export default configuration;

@@ -1,7 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Inject, Injectable, Provider } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { of, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { HTTP_REQUEST_RETRY_STRATEGIES } from './http-retry.di-tokens';

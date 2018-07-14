@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
 
-import { HttpRetryService } from './../../../lib/http-retry/public_api';
+import { HttpRetryService } from './../../../../projects/http-retry/public_api';
 
 @Component({
   selector: 'app-docs-http-retry',

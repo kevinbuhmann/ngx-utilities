@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgxNavDrawerModule } from 'ngx-nav-drawer';
+import { NgxNavDrawerModule } from '@ngx-lite/nav-drawer';
 
-import { HttpRetryModule } from './../lib/http-retry/public_api';
+import { HttpRetryModule } from './../../projects/http-retry/public_api';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DocsHttpRetryComponent } from './docs/docs-http-retry/docs-http-retry.component';

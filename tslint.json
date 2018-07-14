@@ -2,7 +2,6 @@
   "rulesDirectory": [
     "node_modules/codelyzer",
     "node_modules/custom-tslint-rules/dist",
-    "node_modules/rxjs-tslint-rules/dist/rules",
     "tslint-consistent-codestyle"
   ],
   "rules": {
@@ -35,7 +34,7 @@
     "forin": true,
     "import-blacklist": [
       true,
-      "rxjs"
+      "rxjs/Rx"
     ],
     "interface-name": [
       true,
@@ -172,24 +171,11 @@
     "no-attribute-parameter-decorator": true,
     "no-input-rename": false,
     "no-output-rename": false,
-    "pipe-naming": [
-      true,
-      "camelCase",
-      ["app", "ngx"]
-    ],
     "use-host-property-decorator": true,
     "use-input-property-decorator": true,
     "use-life-cycle-interface": true,
     "use-output-property-decorator": true,
     "use-pipe-transform-interface": true,
-
-    // rxjs-tslint-rules
-    "rxjs-no-add": true,
-    "rxjs-no-create": true,
-    "rxjs-no-operator": true,
-    "rxjs-no-patched": true,
-    "rxjs-no-subject-unsubscribe": true,
-    "rxjs-no-wholesale": true,
 
     // custom-tslint-rules
     "import-barrels": [

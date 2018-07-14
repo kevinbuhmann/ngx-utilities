@@ -9,18 +9,18 @@ const defaultOptionsFn = () => ({
 const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 
 const travisKarmaArgs = options.travis ? '--no-progress --browser=ChromeNoSandbox' : '';
-const travisProtractorArgs = options.travis ? '--no-progress --config=protractor-ci.conf.js' : '';
+const travisProtractorArgs = options.travis ? '--no-progress --config=e2e/protractor-ci.conf.js' : '';
 
 (async () => {
   process.on('uncaughtException', handleError);
   process.on('unhandledRejection', handleError);
 
-  await execute(`ng test --no-watch --code-coverage --sourcemaps ${travisKarmaArgs}`);
+  await execute(`ng test --no-watch --code-coverage --source-map ${travisKarmaArgs}`);
 
   await execute('webpack --config ./build/webpack/webpack.server.ts --progress');
 
   const serverProcess = runServer(async () => {
-    await execute(`ng e2e --aot --proxy-config proxy.conf.json ${travisProtractorArgs}`);
+    await execute(`ng e2e ${travisProtractorArgs}`);
 
     exit();
   });

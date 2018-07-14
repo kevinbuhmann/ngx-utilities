@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
 
-import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from './../../../../lib/http-retry/public_api';
+import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from './../../../../../projects/http-retry/public_api';
 
 @Injectable()
 export class ServerUnavailableRetryStrategy implements HttpRequestRetryStrategy {
