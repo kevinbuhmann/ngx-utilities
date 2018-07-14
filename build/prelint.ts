@@ -7,7 +7,7 @@ import { bailIfFailures, Failure } from './helpers/utility.helpers';
   const failures: Failure[] = [];
 
   walkDirectory('.', filePath => {
-    if (filePath.includes('.heroku') === false) {
+    if (filePath.includes('.git') === false && filePath.includes('.heroku') === false) {
       const fileContents = readFile(filePath);
       failures.push(...checkForEmptyFiles(filePath, fileContents));
       failures.push(...checkForLeadingWhitespace(filePath, fileContents));
