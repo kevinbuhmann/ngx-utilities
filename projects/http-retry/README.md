@@ -9,14 +9,14 @@ connections.
 
 To install this library, run:
 
-`npm install http-retry --save` -or- `yarn add http-retry`
+`npm install @ngx-utilities/http-retry --save` -or- `yarn add @ngx-utilities/http-retry`
 
 and then import `HttpRetryModule` it in your Angular `AppModule`:
 
 ```typescript
 // app.module.ts
 
-import { HttpRetryModule } from 'http-retry';
+import { HttpRetryModule } from '@ngx-utilities/http-retry';
 
 @NgModule({
   imports: [
@@ -49,11 +49,11 @@ method and emitted on the `HttpRetryService`'s `httpRetryFailures` observable.
 ```typescript
 // network-error.retry-strategy.ts
 
-import { HttpRequestRetryStrategy } from 'http-retry';
+import { HttpRequestRetryStrategy } from '@ngx-utilities/http-retry';
 
 @Injectable()
 import { Injectable, Provider } from '@angular/core';
-import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from 'http-retry';
+import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from '@ngx-utilities/http-retry';
 
 import { NetworkStatusService } from './../services/network-status.service';
 
@@ -110,7 +110,7 @@ export const serverUnavailableRetryStrategyProvider: Provider = {
 ```typescript
 // my.component.ts
 
-import { HttpRetryService } from 'http-retry';
+import { HttpRetryService } from '@ngx-utilities/http-retry';
 
 export class MyComponent implements OnInit {
   constructor(private readonly httpRetryService: HttpRetryService) { }
@@ -131,7 +131,7 @@ retry strategies which can be instances of classes or plain objects that impleme
 the global interceptor provided by `HttpRetryModule`.
 
 ```typescript
-import { httpRequestRetry } from 'http-retry';
+import { httpRequestRetry } from '@ngx-utilities/http-retry';
 
 export class MyComponent implements OnInit {
   constructor(private readonly httpClient: HttpClient) { }
