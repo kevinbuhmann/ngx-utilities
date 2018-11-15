@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.4
+- feat: update to Angular 7
+
 ## 0.0.3
 - feat: update to Angular 6
 
