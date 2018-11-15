@@ -8,8 +8,8 @@ const defaultOptionsFn = () => ({
 
 const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 
-const travisKarmaArgs = options.travis ? '--no-progress --browser=ChromeNoSandbox' : '';
-const travisProtractorArgs = options.travis ? '--no-progress --config=e2e/protractor-ci.conf.js' : '';
+const travisKarmaArgs = options.travis ? '--no-progress --browsers=ChromeNoSandbox' : '';
+const travisProtractorArgs = options.travis ? '--protractor-config=e2e/protractor-ci.conf.js' : '';
 
 (async () => {
   process.on('uncaughtException', handleError);
