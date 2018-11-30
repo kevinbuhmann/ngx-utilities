@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxNavDrawerModule } from '@ngx-lite/nav-drawer';
 
-import { HttpRetryModule } from './../../projects/http-retry/public_api';
+import { HttpRetryModule } from './../../projects/http-retry/src/public_api';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DocsHttpRetryComponent } from './docs/docs-http-retry/docs-http-retry.component';
