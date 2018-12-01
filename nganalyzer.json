@@ -1,6 +1,0 @@
-{
-  "rules": {
-    "no-unused-component": true,
-    "no-unused-component-binding": true
-  }
-}
