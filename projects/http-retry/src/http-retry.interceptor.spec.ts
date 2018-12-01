@@ -5,7 +5,8 @@ import { async, inject, TestBed } from '@angular/core/testing';
 
 import { HTTP_REQUEST_RETRY_STRATEGIES } from './http-retry.di-tokens';
 import { HttpRequestRetryStrategy } from './http-retry.helpers';
-import { attemptNumberHeader, httpRetryInterceptorProvider } from './http-retry.interceptor';
+import { expectOneRequest } from './http-retry.helpers.spec';
+import { httpRetryInterceptorProvider, requestAttemptNumberHeader } from './http-retry.interceptor';
 
 @Injectable()
 export class ServerUnavailableRetryStrategy implements HttpRequestRetryStrategy {
@@ -40,26 +41,39 @@ describe('HttpRetryInterceptor', () => {
     inject([HttpClient, HttpTestingController], async (httpClient: HttpClient, httpMock: HttpTestingController) => {
       httpClient.get('/api/people').subscribe();
 
-      (await expectOneRequest(httpMock, '/api/people', 1)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-      (await expectOneRequest(httpMock, '/api/people', 2)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-      (await expectOneRequest(httpMock, '/api/people', 3)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-      (await expectOneRequest(httpMock, '/api/people', 4)).flush(null, { status: 502, statusText: 'Bad Gateway' });
-      (await expectOneRequest(httpMock, '/api/people', 5)).flush(null, { status: 200, statusText: 'OK' });
+      {
+        const testRequest1 = await expectOneRequest(httpMock, '/api/people');
+        expectRequestAttemptNumber(testRequest1).toBe('1');
+        testRequest1.flush(null, { status: 502, statusText: 'Bad Gateway' });
+      }
+
+      {
+        const testRequest2 = await expectOneRequest(httpMock, '/api/people');
+        expectRequestAttemptNumber(testRequest2).toBe('2');
+        testRequest2.flush(null, { status: 502, statusText: 'Bad Gateway' });
+      }
+
+      {
+        const testRequest3 = await expectOneRequest(httpMock, '/api/people');
+        expectRequestAttemptNumber(testRequest3).toBe('3');
+        testRequest3.flush(null, { status: 502, statusText: 'Bad Gateway' });
+      }
+
+      {
+        const testRequest4 = await expectOneRequest(httpMock, '/api/people');
+        expectRequestAttemptNumber(testRequest4).toBe('4');
+        testRequest4.flush(null, { status: 502, statusText: 'Bad Gateway' });
+      }
+
+      {
+        const testRequest5 = await expectOneRequest(httpMock, '/api/people');
+        expectRequestAttemptNumber(testRequest5).toBe('5');
+        testRequest5.flush(null, { status: 200, statusText: 'OK' });
+      }
     })
   ));
 });
 
-function expectOneRequest(httpMock: HttpTestingController, url: string, expectedAttemptNumber?: number) {
-  return new Promise<TestRequest>(resolve => {
-    setTimeout(() => {
-      const testRequest = httpMock.expectOne(url);
-
-      if (expectedAttemptNumber !== undefined) {
-        const attemptNumber = +testRequest.request.headers.get(attemptNumberHeader);
-        expect(attemptNumber).toBe(expectedAttemptNumber);
-      }
-
-      resolve(testRequest);
-    }, 0);
-  });
+function expectRequestAttemptNumber(testRequest: TestRequest) {
+  return expect(testRequest.request.headers.get(requestAttemptNumberHeader));
 }

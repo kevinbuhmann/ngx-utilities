@@ -6,7 +6,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { HTTP_REQUEST_RETRY_STRATEGIES } from './http-retry.di-tokens';
 import { httpRequestRetry, HttpRequestRetryStrategy } from './http-retry.helpers';
 
-export const attemptNumberHeader = 'X-Request-Attempt-Number';
+export const requestAttemptNumberHeader = 'X-Request-Attempt-Number';
 
 @Injectable()
 export class HttpRetryInterceptor implements HttpInterceptor {
@@ -40,5 +40,5 @@ export const httpRetryInterceptorProvider: Provider = {
 };
 
 function getRequestWithAttemptNumber(request: HttpRequest<any>, attemptNumber: number) {
-  return request.clone({ headers: request.headers.append(attemptNumberHeader, attemptNumber.toString()) });
+  return request.clone({ headers: request.headers.append(requestAttemptNumberHeader, attemptNumber.toString()) });
 }
