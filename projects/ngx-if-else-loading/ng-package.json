@@ -1,0 +1,14 @@
+{
+  "$schema": "./../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "./../../dist/projects/ngx-if-else-loading",
+  "lib": {
+    "entryFile": "./src/public_api.ts",
+    "languageLevel": [
+      "dom",
+      "es2017"
+    ]
+  },
+  "whitelistedNonPeerDependencies": [
+    "@ngx-lite/loaders"
+  ]
+}

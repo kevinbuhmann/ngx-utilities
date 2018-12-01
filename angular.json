@@ -105,6 +105,21 @@
           }
         }
       }
+    },
+    "@ngx-utilities/ngx-if-else-loading": {
+      "root": "./projects/ngx-if-else-loading",
+      "sourceRoot": "./projects/ngx-if-else-loading/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "./projects/tsconfig.lib.json",
+            "project": "./projects/ngx-if-else-loading/ng-package.json"
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-utilities-app"

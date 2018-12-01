@@ -18,6 +18,7 @@
     "@angular/platform-browser": "7.1.1",
     "@angular/platform-browser-dynamic": "7.1.1",
     "@angular/router": "7.1.1",
+    "@ngx-lite/loaders": "0.2.1",
     "@ngx-lite/nav-drawer": "0.3.5",
     "core-js": "2.5.7",
     "express": "4.16.4",

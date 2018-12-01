@@ -1,0 +1,15 @@
+{
+  "name": "@ngx-utilities/ngx-if-else-loading",
+  "version": "0.0.1",
+  "repository": "https://github.com/kevinphelps/ngx-utilities",
+  "author": "Kevin Phelps",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "@angular/core": "^7.0.0",
+    "@angular/common": "^7.0.0"
+  },
+  "dependencies": {
+    "@ngx-lite/loaders": "0.2.1"
+  }
+}
