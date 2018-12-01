@@ -1,6 +1,6 @@
 # http-retry
 
-[![npm version](https://badge.fury.io/js/%40ngx-utilities%2Fhttp-retry.svg)](https://badge.fury.io/js/%40ngx-utilities%2Fhttp-retry)
+[![npm version](https://badge.fury.io/js/%40ngx-utilities%2Fhttp-retry.svg)](https://www.npmjs.com/package/@ngx-utilities/http-retry)
 
 A configurable Angular HTTP interceptor to retry GET requests and respond to errors and flaky
 connections.
