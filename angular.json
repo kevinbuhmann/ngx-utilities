@@ -92,6 +92,21 @@
           }
         }
       }
+    },
+    "@ngx-utilities/ngx-let": {
+      "root": "projects/ngx-let",
+      "sourceRoot": "projects/ngx-let/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/tsconfig.lib.json",
+            "project": "projects/ngx-let/ng-package.json"
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-utilities-app"

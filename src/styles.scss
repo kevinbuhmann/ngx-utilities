@@ -33,3 +33,17 @@ header {
     font-size: 24px;
   }
 }
+
+ngx-nav-drawer .ngx-nav-drawer {
+  & > a {
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  .nav-category {
+    padding: 10px 14px;
+    font-size: 18px;
+    display: block;
+    border-bottom: 1px solid $color-gray;
+  }
+}
