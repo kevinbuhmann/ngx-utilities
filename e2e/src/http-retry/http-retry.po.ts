@@ -6,7 +6,7 @@ export class HttpRetryPage {
   }
 
   getPageHeading() {
-    return element(by.css('app-docs-http-retry h1')).getText();
+    return element(by.css('app-docs-http-retry h2')).getText();
   }
 
   getErrorMessages() {
