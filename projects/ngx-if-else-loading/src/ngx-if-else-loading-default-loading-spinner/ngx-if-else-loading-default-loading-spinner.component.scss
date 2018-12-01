@@ -1,0 +1,12 @@
+.loading {
+  width: 100%;
+  text-align: center;
+
+  .message {
+    font-size: 20px;
+  }
+
+  ngx-loading-spinner {
+    margin: auto;
+  }
+}

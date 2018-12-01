@@ -284,6 +284,13 @@
     tree-kill "1.2.0"
     webpack-sources "1.2.0"
 
+"@ngx-lite/loaders@0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@ngx-lite/loaders/-/loaders-0.2.1.tgz#0bf824e63c1132c05825b503b83c8345d26ae2fc"
+  integrity sha512-/PaXKZ0+aON7stiORRzt8necQN9xlIHWDp8xNP8Zd+wZenN6aLAfsi5E/t57n2I/ThKQhb44FM473aWq4zrDsg==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngx-lite/nav-drawer@0.3.5":
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/@ngx-lite/nav-drawer/-/nav-drawer-0.3.5.tgz#920390f78a4ebb343d079e97296e8154e0ad2a5f"
