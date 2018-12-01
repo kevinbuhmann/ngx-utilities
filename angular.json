@@ -46,7 +46,13 @@
               "buildOptimizer": true
             }
           }
-        },
+        }
+      }
+    },
+    "ngx-utilities-app-karma": {
+      "root": "",
+      "projectType": "application",
+      "architect": {
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
