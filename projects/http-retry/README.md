@@ -11,7 +11,7 @@ To install this library, run:
 
 `npm install @ngx-utilities/http-retry --save` -or- `yarn add @ngx-utilities/http-retry`
 
-and then import `HttpRetryModule` it in your Angular `AppModule`:
+and then import `HttpRetryModule` in your Angular `AppModule`:
 
 ```typescript
 // app.module.ts

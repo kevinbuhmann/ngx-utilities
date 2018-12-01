@@ -12,7 +12,7 @@ To install this library, run:
 
 `npm install @ngx-utilities/ngx-let --save` -or- `yarn add @ngx-utilities/ngx-let`
 
-and then import and export `NgxLetModule` it in your Angular `SharedModule`:
+and then import and export `NgxLetModule` in your Angular `SharedModule`:
 
 ```typescript
 // shared.module.ts
