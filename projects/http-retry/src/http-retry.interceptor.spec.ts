@@ -72,6 +72,17 @@ describe('HttpRetryInterceptor', () => {
       }
     })
   ));
+
+  it('should do nothing for non-GET requests', async(
+    inject([HttpClient, HttpTestingController], async (httpClient: HttpClient, httpMock: HttpTestingController) => {
+      httpClient.post('/api/people', '').subscribe();
+
+      const testRequest = await expectOneRequest(httpMock, '/api/people');
+      expectRequestAttemptNumber(testRequest).toBeNull();
+
+      // the verification in afterEach will ensure that no retries were made
+    })
+  ));
 });
 
 function expectRequestAttemptNumber(testRequest: TestRequest) {

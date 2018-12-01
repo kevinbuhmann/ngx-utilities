@@ -1,7 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Inject, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 
-import { httpRetryInterceptorProvider } from './http-retry.interceptor';
+import { httpRetryInterceptorProvider, HttpRetryInterceptor } from './http-retry.interceptor';
 
 @NgModule({
   imports: [HttpClientModule]
@@ -17,9 +17,12 @@ export class HttpRetryModule {
   constructor(
     @Optional()
     @SkipSelf()
-    parentModule: HttpRetryModule
+    parentModule: HttpRetryModule,
+    @Inject(HTTP_INTERCEPTORS) httpInterceptors: HttpInterceptor[]
   ) {
-    if (parentModule) {
+    const httpRetryInterceptors = httpInterceptors.filter(httpInterceptor => httpInterceptor instanceof HttpRetryInterceptor);
+
+    if (parentModule || httpRetryInterceptors.length > 1) {
       throw new Error('HttpRetryModule is already loaded. Import it only once (e.g. in your AppModule or CoreModule).');
     }
   }
