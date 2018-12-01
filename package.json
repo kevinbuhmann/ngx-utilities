@@ -52,7 +52,6 @@
     "karma-jasmine": "2.0.1",
     "karma-jasmine-html-reporter": "1.4.0",
     "ng-packagr": "4.4.0",
-    "nganalyzer": "0.2.0",
     "nodemon": "1.18.7",
     "prettier": "1.15.3",
     "protractor": "5.4.1",

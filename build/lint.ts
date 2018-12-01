@@ -5,7 +5,6 @@ const defaultOptionsFn = () => ({
   prettier: true,
   sasslint: true,
   tslint: true,
-  nganalyzer: true,
   fix: false
 });
 
@@ -25,10 +24,6 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 
   if (options.tslint) {
     await execute(`tslint --project ./tsconfig.json ${options.fix ? '--fix' : ''}`);
-  }
-
-  if (options.nganalyzer) {
-    await execute('nganalyzer --project ./tsconfig.json');
   }
 })();
 
