@@ -1,11 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "./projects",
   "projects": {
     "ngx-utilities-app": {
-      "root": "",
-      "sourceRoot": "src",
+      "root": "./",
+      "sourceRoot": "./src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {},
@@ -13,17 +13,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "./dist/app",
+            "index": "./src/index.html",
+            "main": "./src/main.ts",
+            "polyfills": "./src/polyfills.ts",
+            "tsConfig": "./src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "./src/favicon.ico",
+              "./src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "./src/styles.scss"
             ],
             "scripts": []
           },
@@ -31,8 +31,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -50,60 +50,60 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
+            "main": "./src/test.ts",
+            "polyfills": "./src/polyfills.ts",
+            "tsConfig": "./src/tsconfig.spec.json",
+            "karmaConfig": "./src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "./src/styles.scss"
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "./src/favicon.ico",
+              "./src/assets"
             ]
           }
         }
       }
     },
     "ngx-utilities-app-e2e": {
-      "root": "e2e/",
+      "root": "./e2e/",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js"
+            "protractorConfig": "./e2e/protractor.conf.js"
           }
         }
       }
     },
     "@ngx-utilities/http-retry": {
-      "root": "projects/http-retry",
-      "sourceRoot": "projects/http-retry/src",
+      "root": "./projects/http-retry",
+      "sourceRoot": "./projects/http-retry/src",
       "projectType": "library",
       "prefix": "ngx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/tsconfig.lib.json",
-            "project": "projects/http-retry/ng-package.json"
+            "tsConfig": "./projects/tsconfig.lib.json",
+            "project": "./projects/http-retry/ng-package.json"
           }
         }
       }
     },
     "@ngx-utilities/ngx-let": {
-      "root": "projects/ngx-let",
-      "sourceRoot": "projects/ngx-let/src",
+      "root": "./projects/ngx-let",
+      "sourceRoot": "./projects/ngx-let/src",
       "projectType": "library",
       "prefix": "ngx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/tsconfig.lib.json",
-            "project": "projects/ngx-let/ng-package.json"
+            "tsConfig": "./projects/tsconfig.lib.json",
+            "project": "./projects/ngx-let/ng-package.json"
           }
         }
       }
