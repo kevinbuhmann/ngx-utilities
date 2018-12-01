@@ -198,6 +198,7 @@ describe('httpRequestRetry', () => {
 function expectOneRequest(httpMock: HttpTestingController, url: string) {
   return new Promise<TestRequest>(resolve => {
     setTimeout(() => {
+      expect(true).toBe(true); // prevent "SPEC HAS NO EXPECTATIONS" message
       resolve(httpMock.expectOne(url));
     }, 0);
   });
