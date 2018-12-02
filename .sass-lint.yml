@@ -1,6 +1,6 @@
 files:
   include: 'src/**/*.s+(a|c)ss'
-  ignore: 
+  ignore:
     - 'node_modules'
     - '**/_print.scss'
     - 'src/assets_/**/*.s+(a|c)ss'
@@ -10,9 +10,8 @@ rules:
   # Color
   no-color-literals: 1
   hex-notation:
-  - 1
-  -
-    style: lowercase
+    - 1
+    - style: lowercase
 
   # Extends
   extends-before-mixins: 1
@@ -45,27 +44,23 @@ rules:
   no-warn: 1
   no-css-comments: true
   no-duplicate-properties:
-  - 0
-  -
-    exclude: [display, background]
+    - 0
+    - exclude: [display, background]
 
   # Styles
   property-sort-order: 0
   clean-import-paths:
-  - 0
-  - 
-    leading-underscore: true
+    - 0
+    - leading-underscore: true
 
   leading-zero: 0
   nesting-depth:
-  - 1
-  -
-    max-depth: 3
-  
+    - 1
+    - max-depth: 3
+
   quotes:
-  - 1
-  -
-    style: single
+    - 1
+    - style: single
 
   # Inner Spacing
   space-after-comma: 1
@@ -84,5 +79,4 @@ rules:
 
   class-name-format:
     - 1
-    -
-      convention: hyphenatedbem
+    - convention: hyphenatedbem
