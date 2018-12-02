@@ -16,6 +16,7 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
   if (options.prettier) {
     await runFormatter('prettier --config ./prettier.json "./**/*.ts"', '--write', '--list-different', options.fix);
     await runFormatter('prettier --config ./prettier.json "./**/*.scss"', '--write', '--list-different', options.fix);
+    await runFormatter('prettier --config ./prettier.json "./**/*.json"', '--write', '--list-different', options.fix);
   }
 
   if (options.sasslint) {
