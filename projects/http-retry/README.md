@@ -49,9 +49,6 @@ method and emitted on the `HttpRetryService`'s `httpRetryFailures` observable.
 ```typescript
 // network-error.retry-strategy.ts
 
-import { HttpRequestRetryStrategy } from '@ngx-utilities/http-retry';
-
-@Injectable()
 import { Injectable, Provider } from '@angular/core';
 import { HttpRequestRetryStrategy, HTTP_REQUEST_RETRY_STRATEGIES } from '@ngx-utilities/http-retry';
 
