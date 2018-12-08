@@ -13,7 +13,6 @@ export const staticOptions: ServeStaticOptions = {
 @Controller('')
 export class StaticFilesController {
   private readonly indexHtml: string;
-  private readonly oldBundleReloadJs: string;
   private readonly staticFileHandler: Handler;
 
   constructor(fileCache: FileCacheService) {
