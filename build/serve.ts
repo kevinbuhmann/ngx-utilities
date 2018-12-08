@@ -6,16 +6,26 @@ import { execute } from './helpers/shell.helpers';
 import { bail } from './helpers/utility.helpers';
 
 const indexFilePath = './dist/app/index.html';
-const serverFilePath = './dist/server/server.js';
+const serverBundleFilePath = './dist/server/main.js';
+const serverEntryFilePath = './dist/server/server.js';
 
 (async () => {
   clean();
 
-  const ngBuild = execute('ng build --watch');
-  const buildServer = execute('webpack --config ./build/webpack/webpack.server.ts --progress --watch');
-  const runServer = waitForServerToBeReady().then(() => execute(`nodemon ${serverFilePath}`));
+  const ngBuildFn = () => execute('ng build --project ngx-utilities-app-client --watch');
+  const ngServerBuildFn = () => execute('ng build --project ngx-utilities-app-server --watch');
 
-  await Promise.all([ngBuild, buildServer, runServer]);
+  const buildServerFn = async () => {
+    await waitForFiles([serverBundleFilePath]);
+    return execute('webpack --config ./build/webpack/webpack.server.ts --progress --watch');
+  };
+
+  const runServerFn = async () => {
+    await waitForFiles([indexFilePath, serverBundleFilePath, serverEntryFilePath]);
+    return execute(`nodemon ${serverEntryFilePath}`);
+  };
+
+  await Promise.all([ngBuildFn(), ngServerBuildFn(), buildServerFn(), runServerFn()]);
 })();
 
 function clean() {
@@ -29,10 +39,10 @@ function clean() {
   }
 }
 
-function waitForServerToBeReady() {
+function waitForFiles(filePaths: string[]) {
   return new Promise<void>(resolve => {
     const interval = setInterval(() => {
-      const filesExist = [indexFilePath, serverFilePath].every(filePath => fs.existsSync(filePath));
+      const filesExist = filePaths.every(filePath => fs.existsSync(filePath));
 
       if (filesExist) {
         clearInterval(interval);

@@ -27,7 +27,8 @@ const progressArg = options.travis ? '--no-progress' : '--progress';
     await execute('ts-node ./build/lint.ts');
   }
 
-  await execute(`ng build --prod ${progressArg}`);
+  await execute(`ng build --project ngx-utilities-app-client --prod ${progressArg}`);
+  await execute(`ng build --project ngx-utilities-app-server --prod ${progressArg}`);
   await execute(`webpack --config ./build/webpack/webpack.server.ts ${progressArg}`);
 
   if (options.test) {

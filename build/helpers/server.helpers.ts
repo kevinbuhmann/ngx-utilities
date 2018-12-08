@@ -1,9 +1,9 @@
-import { fork } from 'child_process';
+import { spawn } from 'child_process';
 
 export function runServer(onListening: () => Promise<any>) {
   console.log('starting server...');
 
-  const serverProcess = fork('./dist/server/server.js');
+  const serverProcess = spawn('node', ['./dist/server/server.js'], { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
 
   serverProcess.on('message', async message => {
     if (message === 'listening') {
