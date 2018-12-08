@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { Injectable, Provider } from '@angular/core';
-import { async, inject, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
 import { HTTP_REQUEST_RETRY_STRATEGIES } from './http-retry.di-tokens';
 import { HttpRequestRetryStrategy } from './http-retry.helpers';
@@ -26,63 +26,65 @@ export const serverUnavailableRetryStrategyProvider: Provider = {
 };
 
 describe('HttpRetryInterceptor', () => {
+  let httpClient: HttpClient;
+  let httpMock: HttpTestingController;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [httpRetryInterceptorProvider, serverUnavailableRetryStrategyProvider]
     });
+
+    httpClient = TestBed.get(HttpClient);
+    httpMock = TestBed.get(HttpTestingController);
   });
 
-  afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
+  afterEach(() => {
     httpMock.verify();
+  });
+
+  it('should send the correct attempt number header', async(async () => {
+    httpClient.get('/api/people').subscribe();
+
+    {
+      const testRequest1 = await expectOneRequest(httpMock, '/api/people');
+      expectRequestAttemptNumber(testRequest1).toBe('1');
+      testRequest1.flush(null, { status: 502, statusText: 'Bad Gateway' });
+    }
+
+    {
+      const testRequest2 = await expectOneRequest(httpMock, '/api/people');
+      expectRequestAttemptNumber(testRequest2).toBe('2');
+      testRequest2.flush(null, { status: 502, statusText: 'Bad Gateway' });
+    }
+
+    {
+      const testRequest3 = await expectOneRequest(httpMock, '/api/people');
+      expectRequestAttemptNumber(testRequest3).toBe('3');
+      testRequest3.flush(null, { status: 502, statusText: 'Bad Gateway' });
+    }
+
+    {
+      const testRequest4 = await expectOneRequest(httpMock, '/api/people');
+      expectRequestAttemptNumber(testRequest4).toBe('4');
+      testRequest4.flush(null, { status: 502, statusText: 'Bad Gateway' });
+    }
+
+    {
+      const testRequest5 = await expectOneRequest(httpMock, '/api/people');
+      expectRequestAttemptNumber(testRequest5).toBe('5');
+      testRequest5.flush(null, { status: 200, statusText: 'OK' });
+    }
   }));
 
-  it('should send the correct attempt number header', async(
-    inject([HttpClient, HttpTestingController], async (httpClient: HttpClient, httpMock: HttpTestingController) => {
-      httpClient.get('/api/people').subscribe();
+  it('should do nothing for non-GET requests', async(async () => {
+    httpClient.post('/api/people', '').subscribe();
 
-      {
-        const testRequest1 = await expectOneRequest(httpMock, '/api/people');
-        expectRequestAttemptNumber(testRequest1).toBe('1');
-        testRequest1.flush(null, { status: 502, statusText: 'Bad Gateway' });
-      }
+    const testRequest = await expectOneRequest(httpMock, '/api/people');
+    expectRequestAttemptNumber(testRequest).toBeNull();
 
-      {
-        const testRequest2 = await expectOneRequest(httpMock, '/api/people');
-        expectRequestAttemptNumber(testRequest2).toBe('2');
-        testRequest2.flush(null, { status: 502, statusText: 'Bad Gateway' });
-      }
-
-      {
-        const testRequest3 = await expectOneRequest(httpMock, '/api/people');
-        expectRequestAttemptNumber(testRequest3).toBe('3');
-        testRequest3.flush(null, { status: 502, statusText: 'Bad Gateway' });
-      }
-
-      {
-        const testRequest4 = await expectOneRequest(httpMock, '/api/people');
-        expectRequestAttemptNumber(testRequest4).toBe('4');
-        testRequest4.flush(null, { status: 502, statusText: 'Bad Gateway' });
-      }
-
-      {
-        const testRequest5 = await expectOneRequest(httpMock, '/api/people');
-        expectRequestAttemptNumber(testRequest5).toBe('5');
-        testRequest5.flush(null, { status: 200, statusText: 'OK' });
-      }
-    })
-  ));
-
-  it('should do nothing for non-GET requests', async(
-    inject([HttpClient, HttpTestingController], async (httpClient: HttpClient, httpMock: HttpTestingController) => {
-      httpClient.post('/api/people', '').subscribe();
-
-      const testRequest = await expectOneRequest(httpMock, '/api/people');
-      expectRequestAttemptNumber(testRequest).toBeNull();
-
-      // the verification in afterEach will ensure that no retries were made
-    })
-  ));
+    // the verification in afterEach will ensure that no retries were made
+  }));
 });
 
 function expectRequestAttemptNumber(testRequest: TestRequest) {
