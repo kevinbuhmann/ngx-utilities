@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "./projects",
   "projects": {
-    "ngx-utilities-app": {
+    "ngx-utilities-app-client": {
       "root": "./",
       "sourceRoot": "./src",
       "projectType": "application",
@@ -39,6 +39,31 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            }
+          }
+        }
+      }
+    },
+    "ngx-utilities-app-server": {
+      "root": "./",
+      "sourceRoot": "./src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "./dist/server",
+            "main": "./src/main.server.ts",
+            "tsConfig": "./src/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.prod.ts"
+                }
+              ]
             }
           }
         }
@@ -117,5 +142,5 @@
       }
     }
   },
-  "defaultProject": "ngx-utilities-app"
+  "defaultProject": "ngx-utilities-app-client"
 }

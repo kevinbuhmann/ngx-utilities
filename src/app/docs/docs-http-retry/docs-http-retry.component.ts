@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
 
 import { HttpRetryService } from './../../../../projects/http-retry/src/public_api';
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-docs-http-retry',
@@ -19,7 +20,9 @@ export class DocsHttpRetryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient.get('/api/mock-error?errorStatusCode=503&maxErrorCount=15').subscribe();
+    if (environment.browser) {
+      this.httpClient.get('/api/mock-error?errorStatusCode=503&maxErrorCount=15').subscribe();
+    }
   }
 }
 

@@ -14,10 +14,11 @@ import { serverUnavailableRetryStrategyProvider } from './docs/docs-http-retry/r
 import { DocsNgxIfElseLoadingComponent } from './docs/docs-ngx-if-else-loading/docs-ngx-if-else-loading.component';
 import { DocsNgxLetComponent } from './docs/docs-ngx-let/docs-ngx-let.component';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'ngx-utilities' }),
     CommonModule,
     HttpClientModule,
     AppRoutingModule,
@@ -26,7 +27,14 @@ import { HomeComponent } from './home/home.component';
     NgxLetModule,
     NgxIfElseLoadingModule
   ],
-  declarations: [AppComponent, DocsHttpRetryComponent, DocsNgxLetComponent, DocsNgxIfElseLoadingComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    DocsHttpRetryComponent,
+    DocsNgxLetComponent,
+    DocsNgxIfElseLoadingComponent,
+    HomeComponent,
+    NotFoundComponent
+  ],
   providers: [serverUnavailableRetryStrategyProvider],
   bootstrap: [AppComponent]
 })

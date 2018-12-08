@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { timer, Observable } from 'rxjs';
+import { of, timer, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-docs-ngx-if-else-loading',
@@ -10,6 +12,6 @@ export class DocsNgxIfElseLoadingComponent {
   readonly loaded: Observable<boolean>;
 
   constructor() {
-    this.loaded = timer(0, 1000).pipe(map(value => value % 5 !== 0));
+    this.loaded = environment.browser ? timer(0, 1000).pipe(map(value => value % 5 !== 0)) : of(false);
   }
 }

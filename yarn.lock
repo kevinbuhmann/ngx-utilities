@@ -105,6 +105,13 @@
     "@angular-devkit/core" "7.1.0"
     rxjs "6.3.3"
 
+"@angular/animations@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-7.1.1.tgz#8fecbd19417364946a9ea40c8fdf32462110232f"
+  integrity sha512-iTNxhPPraCZsE4rgM23lguT1kDV4mfYAr+Bsi5J0+v9ZJA+VaKvi6eRW8ZGrx4/rDz6hzTnBn1jgPppHFbsOcw==
+  dependencies:
+    tslib "^1.9.0"
+
 "@angular/cli@7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-7.1.0.tgz#c30ed717d44e9984ae6149e7bb81fd1badad96d7"
@@ -153,6 +160,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/http@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-7.1.1.tgz#f19f17ad42e7f3cdabcf1250ca757640d0f02219"
+  integrity sha512-pRk+c/kz9aJ8te5xzCxlPLpFnwB0d/E9YkOo3/ydaXF9vZw13RTzk00YyzJ41PDzJf8oPDdXtueTQ+vtJ7Srtw==
+  dependencies:
+    tslib "^1.9.0"
+
 "@angular/language-service@7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-7.1.1.tgz#6bbe35b2430ad54618a1803f881efb5894b296c9"
@@ -168,6 +182,15 @@
   resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-7.1.1.tgz#a6bd408f656dc43ee5a2d8af3dfaa786c7c1dfca"
   dependencies:
     tslib "^1.9.0"
+
+"@angular/platform-server@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/platform-server/-/platform-server-7.1.1.tgz#adecd03e586d2f62fee7417e68897067e59aa686"
+  integrity sha512-wG9Xk8R6rWkWIfDQ31IwrL7gAu0gRx/vJW2We1kz1hHKOqnCB22qOTEaFY0hPfKFlwvwcZknm4KFXAizA8ub4A==
+  dependencies:
+    domino "^2.1.0"
+    tslib "^1.9.0"
+    xhr2 "^0.1.4"
 
 "@angular/router@7.1.1":
   version "7.1.1"
@@ -283,6 +306,16 @@
     rxjs "6.3.3"
     tree-kill "1.2.0"
     webpack-sources "1.2.0"
+
+"@nguniversal/express-engine@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@nguniversal/express-engine/-/express-engine-7.0.2.tgz#f7722828d7ec14951d0c24ad438772daf79583c8"
+  integrity sha512-mmNgDpUrcuFcjBOfUlmAliS3St4tSekLdQZWu6PK/d+kw5zicDDlSO/UoUw5g+wz7YHkGQK+VDy3wHc0Bo36rA==
+
+"@nguniversal/module-map-ngfactory-loader@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@nguniversal/module-map-ngfactory-loader/-/module-map-ngfactory-loader-7.0.2.tgz#2df0532f84d4f4e042adb294e3685fad28ed0622"
+  integrity sha512-zZst1DfmWZdozNmYRu6vUacFLKreLVhGfpp/LmBrW/jDESHWU4AtRBQYtH8KfhKFSE+B6ehyGYHPfDdSa5sk7g==
 
 "@ngx-lite/loaders@0.2.1":
   version "0.2.1"
@@ -2238,6 +2271,11 @@ dom-serialize@^2.2.0:
 domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
+
+domino@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/domino/-/domino-2.1.1.tgz#cd5c639940db72bb7cde1cdb5beea466a4113136"
+  integrity sha512-fqoTi6oQ881wYRENIEmz78hKVoc3X9HqVpklo419yxzebys6dtU5c83iVh3UYvvexPFdAuwlDYCsUM9//CrMMg==
 
 dot-prop@^4.1.0:
   version "4.2.0"
@@ -7720,6 +7758,11 @@ ws@~3.3.1:
 xdg-basedir@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
+
+xhr2@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/xhr2/-/xhr2-0.1.4.tgz#7f87658847716db5026323812f818cadab387a5f"
+  integrity sha1-f4dliEdxbbUCYyOBL4GMras4el8=
 
 xml2js@^0.4.17:
   version "0.4.19"

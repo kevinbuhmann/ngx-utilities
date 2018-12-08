@@ -2,8 +2,6 @@ import { static as expressStatic, Handler, NextFunction, Request, Response } fro
 import { Controller, Get } from 'rx-routes';
 import { ServeStaticOptions } from 'serve-static';
 
-import { FileCacheService } from './../services/file-cache.service';
-
 export const staticOptions: ServeStaticOptions = {
   redirect: false,
   maxAge: '1y',
@@ -12,27 +10,19 @@ export const staticOptions: ServeStaticOptions = {
 
 @Controller('')
 export class StaticFilesController {
-  private readonly indexHtml: string;
   private readonly staticFileHandler: Handler;
 
-  constructor(fileCache: FileCacheService) {
-    this.indexHtml = fileCache.getFile('./dist/app/index.html');
+  constructor() {
     this.staticFileHandler = expressStatic('./dist/app', staticOptions);
   }
 
   @Get('/*')
   getStaticFile(req: Request, res: Response, next: NextFunction) {
-    const fallback: NextFunction = () => {
-      const extensionlessUrlRegex = /\/[^.]*(\?.+)?$/; // no period except in query string
-
-      if (req.method === 'GET' && extensionlessUrlRegex.test(req.url)) {
-        res.setHeader('Cache-Control', 'no-cache');
-        res.type('html').send(this.indexHtml);
-        next();
-      }
-    };
-
-    this.staticFileHandler(req, res, fallback);
+    if (req.url === '/') {
+      next();
+    } else {
+      this.staticFileHandler(req, res, next);
+    }
   }
 }
 
