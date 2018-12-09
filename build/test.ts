@@ -17,8 +17,6 @@ const travisProtractorArgs = options.travis ? '--protractor-config=e2e/protracto
 
   await execute(`ng test --no-watch --code-coverage --source-map ${travisKarmaArgs}`);
 
-  await execute('webpack --config ./build/webpack/webpack.server.ts --progress');
-
   const serverProcess = runServer(async () => {
     await execute(`ng e2e ${travisProtractorArgs}`);
 
