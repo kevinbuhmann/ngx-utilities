@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="project | async">
+  <ng-container *ngSwitchCase="'http-retry'">
+    <app-demo-http-retry></app-demo-http-retry>
+  </ng-container>
+  <ng-container *ngSwitchCase="'ngx-if-else-loading'">
+    <app-demo-ngx-if-else-loading></app-demo-ngx-if-else-loading>
+  </ng-container>
+  <ng-container *ngSwitchCase="'ngx-let'">
+    <app-demo-ngx-let></app-demo-ngx-let>
+  </ng-container>
+</ng-container>

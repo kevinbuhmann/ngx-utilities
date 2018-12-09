@@ -4,14 +4,14 @@ import { browser, by, element } from 'protractor';
 
 export class HttpRetryPage {
   navigateTo() {
-    return browser.get('/docs/http-retry');
+    return browser.get('/projects/http-retry/demo');
   }
 
-  getPageHeading() {
-    return element(by.css('app-docs-http-retry h2')).getText();
+  getProjectHeading() {
+    return element(by.css('app-project-docs-tabs h2')).getText();
   }
 
   getErrorMessages() {
-    return element.all(by.css('app-docs-http-retry .e2e-failure-message'));
+    return element.all(by.css('app-demo-http-retry .e2e-failure-message'));
   }
 }

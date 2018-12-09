@@ -7,10 +7,10 @@ import { HttpRetryService } from './../../../../projects/http-retry/src/public_a
 import { environment } from './../../../environments/environment';
 
 @Component({
-  selector: 'app-docs-http-retry',
-  templateUrl: './docs-http-retry.component.html'
+  selector: 'app-demo-http-retry',
+  templateUrl: './demo-http-retry.component.html'
 })
-export class DocsHttpRetryComponent implements OnInit {
+export class DemoHttpRetryComponent implements OnInit {
   readonly httpRetryFailures: Observable<string[]>;
 
   constructor(private readonly httpClient: HttpClient, private readonly httpRetryService: HttpRetryService) {

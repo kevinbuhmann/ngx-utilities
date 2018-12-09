@@ -9,9 +9,9 @@ describe('http-retry', () => {
     page = new HttpRetryPage();
   });
 
-  it('should display heading', () => {
+  it('should display project heading', () => {
     page.navigateTo();
-    expect(page.getPageHeading()).toEqual('@ngx-utilities/http-retry');
+    expect(page.getProjectHeading()).toEqual('@ngx-utilities/http-retry');
   });
 
   it('should show the error message after retrying', () => {
@@ -19,7 +19,7 @@ describe('http-retry', () => {
 
     expect(page.getErrorMessages().count()).toBe(0);
 
-    browser.driver.sleep(5000);
+    browser.driver.sleep(2500);
 
     const errorMessages = page.getErrorMessages();
     const errorPattern = /^Received HTTP 503 from http:\/\/localhost:[0-9]+\/api\/mock-error\?errorStatusCode=503&maxErrorCount=15\.$/g;

@@ -5,10 +5,10 @@ import { map } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
 
 @Component({
-  selector: 'app-docs-ngx-if-else-loading',
-  templateUrl: './docs-ngx-if-else-loading.component.html'
+  selector: 'app-demo-ngx-if-else-loading',
+  templateUrl: './demo-ngx-if-else-loading.component.html'
 })
-export class DocsNgxIfElseLoadingComponent {
+export class DemoNgxIfElseLoadingComponent {
   readonly loaded: Observable<boolean>;
 
   constructor() {
