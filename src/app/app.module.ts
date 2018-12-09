@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgxNavDrawerModule } from '@ngx-lite/nav-drawer';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule.withServerTransition({ appId: 'ngx-utilities' }),
     CommonModule,
     HttpClientModule,
+    BrowserTransferStateModule,
     AppRoutingModule,
     NgxNavDrawerModule
   ],

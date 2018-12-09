@@ -7,11 +7,10 @@ import * as http from 'http';
 import * as morgan from 'morgan';
 import { registerController } from 'rx-routes';
 
+import { environment } from './../environments/environment';
 import { MockErrorsController } from './controllers/mock-errors.controller';
 import { registerServerRenderingViewEngine, ServerRenderingController } from './controllers/server-rendering.controller';
 import { StaticFilesController } from './controllers/static-files.controller';
-
-const port = process.env.PORT || 4300;
 
 process.on('uncaughtException', handleFatalError);
 process.on('unhandledRejection', handleFatalError);
@@ -31,8 +30,8 @@ process.on('unhandledRejection', handleFatalError);
   registerController(app, staticFilesController);
   registerController(app, serverRenderingController);
 
-  server.listen(port, async () => {
-    console.log(`listening on port ${port}.`);
+  server.listen(environment.serverPort, async () => {
+    console.log(`listening on port ${environment.serverPort}.`);
 
     if (process.send) {
       process.send('listening');

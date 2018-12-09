@@ -6,7 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'docs', loadChildren: 'app/docs/docs.module#DocsModule' },
+  { path: 'projects', loadChildren: 'app/docs/docs.module#DocsModule' },
   { path: '**', component: NotFoundComponent }
 ];
 

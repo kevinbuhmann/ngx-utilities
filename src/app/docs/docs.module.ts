@@ -1,24 +1,54 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HttpRetryModule } from './../../../projects/http-retry/src/public_api';
-import { NgxIfElseLoadingModule } from './../../../projects/ngx-if-else-loading/src/public_api';
-import { NgxLetModule } from './../../../projects/ngx-let/src/public_api';
-import { DocsHttpRetryComponent } from './docs-http-retry/docs-http-retry.component';
+import { MarkdownDocumentType } from './../common/shared/markdown-document/markdown-document.service';
+import { SharedModule } from './../common/shared/shared.module';
+import { DemoNgxIfElseLoadingComponent } from './demo-ngx-if-else-loading/demo-ngx-if-else-loading.component';
+import { DemoNgxLetComponent } from './demo-ngx-let/demo-ngx-let.component';
+import { DemoHttpRetryComponent } from './docs-http-retry/demo-http-retry.component';
 import { serverUnavailableRetryStrategyProvider } from './docs-http-retry/retry-strategies/server-unavailable.retry-strategy';
-import { DocsNgxIfElseLoadingComponent } from './docs-ngx-if-else-loading/docs-ngx-if-else-loading.component';
-import { DocsNgxLetComponent } from './docs-ngx-let/docs-ngx-let.component';
+import { ProjectDemoComponent } from './project-demo/project-demo.component';
+import { ProjectDocsTabsComponent } from './project-docs-tabs/project-docs-tabs.component';
+import { ProjectDocumentComponent } from './project-document/project-document.component';
 
 export const routes: Routes = [
-  { path: 'http-retry', component: DocsHttpRetryComponent },
-  { path: 'ngx-let', component: DocsNgxLetComponent },
-  { path: 'ngx-if-else-loading', component: DocsNgxIfElseLoadingComponent }
+  {
+    path: ':project',
+    component: ProjectDocsTabsComponent,
+    children: [
+      {
+        path: '',
+        component: ProjectDocumentComponent,
+        data: {
+          documentType: MarkdownDocumentType.README
+        }
+      },
+      {
+        path: 'changelog',
+        component: ProjectDocumentComponent,
+        data: {
+          documentType: MarkdownDocumentType.CHANGELOG
+        }
+      },
+      {
+        path: 'demo',
+        component: ProjectDemoComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), HttpRetryModule.forRoot(), NgxLetModule, NgxIfElseLoadingModule],
-  declarations: [DocsHttpRetryComponent, DocsNgxIfElseLoadingComponent, DocsNgxLetComponent],
+  imports: [RouterModule.forChild(routes), HttpRetryModule.forRoot(), SharedModule],
+  declarations: [
+    DemoHttpRetryComponent,
+    DemoNgxIfElseLoadingComponent,
+    DemoNgxLetComponent,
+    ProjectDemoComponent,
+    ProjectDocsTabsComponent,
+    ProjectDocumentComponent
+  ],
   providers: [serverUnavailableRetryStrategyProvider]
 })
 export class DocsModule {}

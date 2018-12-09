@@ -5,10 +5,10 @@ import { map } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
 
 @Component({
-  selector: 'app-docs-ngx-let',
-  templateUrl: './docs-ngx-let.component.html'
+  selector: 'app-demo-ngx-let',
+  templateUrl: './demo-ngx-let.component.html'
 })
-export class DocsNgxLetComponent {
+export class DemoNgxLetComponent {
   readonly value: Observable<boolean>;
 
   constructor() {

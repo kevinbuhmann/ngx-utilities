@@ -1,4 +1,9 @@
+@import '~prismjs/themes/prism.css';
+
 $color-gray: #ccc;
+$color-black: #000;
+$color-code: #f1f1f1;
+$color-code-border: #e4e4e4;
 
 html {
   box-sizing: border-box;
@@ -34,6 +39,17 @@ header {
   }
 }
 
+pre {
+  background: $color-code;
+  border-left: 8px solid $color-code-border;
+  padding: 8px;
+}
+
+code {
+  background: $color-code;
+  padding: 2px;
+}
+
 ngx-nav-drawer .ngx-nav-drawer {
   & > a {
     font-size: 16px;
@@ -45,5 +61,11 @@ ngx-nav-drawer .ngx-nav-drawer {
     font-size: 18px;
     display: block;
     border-bottom: 1px solid $color-gray;
+  }
+}
+
+ngx-tab-routes .ngx-tabs {
+  .ngx-tabs__nav > a:not(.active) {
+    color: $color-black;
   }
 }
