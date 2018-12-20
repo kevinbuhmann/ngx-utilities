@@ -5,6 +5,7 @@
     "grouped-imports": true,
     "injected-service-access": true,
     "injected-service-name": true,
+    "injected-service-order": true,
     "normalized-import-paths": true,
 
     // core tslint rules
