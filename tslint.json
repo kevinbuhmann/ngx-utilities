@@ -1,6 +1,9 @@
 {
-  "rulesDirectory": ["node_modules/codelyzer", "tslint-consistent-codestyle"],
+  "rulesDirectory": ["tmp/custom-tslint-rules", "node_modules/codelyzer", "tslint-consistent-codestyle"],
   "rules": {
+    // project rules
+    "normalized-import-paths": true,
+
     // core tslint rules
     "adjacent-overload-signatures": true,
     "array-type": [true, "array"],
