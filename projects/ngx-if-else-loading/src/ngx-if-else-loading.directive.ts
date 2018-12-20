@@ -47,7 +47,7 @@ export class NgxIfElseLoadingDirective {
     private readonly viewContainerRef: ViewContainerRef,
     @Optional()
     @Inject(NGX_IF_ELSE_LOADING_CUSTOM_LOADING_COMPONENT)
-    private readonly customLoadingComponent?: Type<LoadingComponent>
+    private readonly ngxIfElseLoadingCustomLoadingComponent?: Type<LoadingComponent>
   ) {}
 
   private updateView(value: any) {
@@ -62,7 +62,7 @@ export class NgxIfElseLoadingDirective {
       this.viewRef = this.viewContainerRef.createEmbeddedView(this.templateRef, context);
       this.viewRef.detectChanges();
     } else if (!value && !this.loadingComponentRef) {
-      const loadingComponent = this.customLoadingComponent || NgxIfElseLoadingDefaultLoadingSpinnerComponent;
+      const loadingComponent = this.ngxIfElseLoadingCustomLoadingComponent || NgxIfElseLoadingDefaultLoadingSpinnerComponent;
       const loadingComponentFactory = this.componentFactoryResolver.resolveComponentFactory(loadingComponent);
 
       this.clear();
