@@ -7,6 +7,7 @@
     "injected-service-name": true,
     "injected-service-order": true,
     "normalized-import-paths": true,
+    "prefer-functions": true,
 
     // core tslint rules
     "adjacent-overload-signatures": true,

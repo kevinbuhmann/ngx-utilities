@@ -1,5 +1,7 @@
 import { browser, by, element } from 'protractor';
 
+// tslint:disable:prefer-functions
+
 export class AppPage {
   navigateTo() {
     return browser.get('/');
