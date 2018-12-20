@@ -1,5 +1,5 @@
 {
-  "rulesDirectory": ["node_modules/codelyzer", "node_modules/custom-tslint-rules/dist", "tslint-consistent-codestyle"],
+  "rulesDirectory": ["node_modules/codelyzer", "tslint-consistent-codestyle"],
   "rules": {
     // core tslint rules
     "adjacent-overload-signatures": true,
@@ -121,15 +121,6 @@
     "use-input-property-decorator": true,
     "use-life-cycle-interface": true,
     "use-output-property-decorator": true,
-    "use-pipe-transform-interface": true,
-
-    // custom-tslint-rules
-    "import-barrels": [
-      true,
-      {
-        "noExplicitBarrels": true,
-        "fileExtensions": ["ts", "js"]
-      }
-    ]
+    "use-pipe-transform-interface": true
   }
 }
