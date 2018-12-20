@@ -3,6 +3,7 @@
   "rules": {
     // project rules
     "grouped-imports": true,
+    "injected-service-access": true,
     "normalized-import-paths": true,
 
     // core tslint rules
