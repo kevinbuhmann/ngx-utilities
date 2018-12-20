@@ -2,6 +2,7 @@
   "rulesDirectory": ["tmp/custom-tslint-rules", "node_modules/codelyzer", "tslint-consistent-codestyle"],
   "rules": {
     // project rules
+    "grouped-imports": true,
     "normalized-import-paths": true,
 
     // core tslint rules
@@ -85,8 +86,8 @@
     "ordered-imports": [
       true,
       {
-        "grouped-imports": true,
-        "import-sources-order": "lowercase-last",
+        "grouped-imports": false,
+        "import-sources-order": "any",
         "named-imports-order": "lowercase-first"
       }
     ],
