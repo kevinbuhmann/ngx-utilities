@@ -1,8 +1,6 @@
-// tslint:disable:ordered-imports
 import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
 import 'source-map-support/register';
-// tslint:enable:ordered-imports
 
 import * as express from 'express';
 import * as http from 'http';
