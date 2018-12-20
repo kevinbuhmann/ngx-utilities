@@ -2,6 +2,7 @@ import { execute } from './helpers/shell.helpers';
 import { parseFlags } from './helpers/utility.helpers';
 
 const defaultOptionsFn = () => ({
+  prelint: true,
   prettier: true,
   sasslint: true,
   tslint: true,
@@ -11,7 +12,9 @@ const defaultOptionsFn = () => ({
 const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 
 (async () => {
+  if (options.prelint) {
   await execute('ts-node ./build/prelint.ts');
+  }
 
   if (options.prettier) {
     await runFormatter('prettier --config ./prettier.json "./**/*.ts"', '--write', '--list-different', options.fix);
