@@ -13,7 +13,7 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
 
 (async () => {
   if (options.prelint) {
-  await execute('ts-node ./build/prelint.ts');
+    await execute('ts-node ./build/prelint.ts');
   }
 
   if (options.prettier) {
@@ -28,6 +28,7 @@ const options = parseFlags(process.argv.slice(2), defaultOptionsFn);
   }
 
   if (options.tslint) {
+    await execute('tsc -p build/tslint-rules/tsconfig.json');
     await execute(`tslint --project ./tsconfig.json ${options.fix ? '--fix' : ''}`);
   }
 })();
