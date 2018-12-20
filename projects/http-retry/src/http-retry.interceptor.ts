@@ -10,12 +10,12 @@ export const requestAttemptNumberHeader = 'X-Request-Attempt-Number';
 
 @Injectable()
 export class HttpRetryInterceptor implements HttpInterceptor {
-  constructor(@Inject(HTTP_REQUEST_RETRY_STRATEGIES) private retryStrategies: HttpRequestRetryStrategy[]) {}
+  constructor(@Inject(HTTP_REQUEST_RETRY_STRATEGIES) private httpRequestRetryStrategies: HttpRequestRetryStrategy[]) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     let result: Observable<HttpEvent<any>>;
 
-    if (this.retryStrategies.length && request.method.toUpperCase() === 'GET') {
+    if (this.httpRequestRetryStrategies.length && request.method.toUpperCase() === 'GET') {
       let attemptNumber = 0;
 
       result = of(undefined).pipe(
@@ -23,7 +23,7 @@ export class HttpRetryInterceptor implements HttpInterceptor {
           attemptNumber++;
         }),
         switchMap(() => next.handle(getRequestWithAttemptNumber(request, attemptNumber))),
-        httpRequestRetry(this.retryStrategies)
+        httpRequestRetry(this.httpRequestRetryStrategies)
       );
     } else {
       result = next.handle(request);
