@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 interface Property {
-  hasValue?: boolean;
   currentValue?: any;
   changesObservable?: Observable<any>;
-  emitValue?: (value: any) => void;
+  changesSubject?: ReplaySubject<any>;
 }
 
 export function ObserveProperty<T>(observedPropertyKey: keyof T) {
@@ -16,46 +15,32 @@ export function ObserveProperty<T>(observedPropertyKey: keyof T) {
   };
 
   function getProperty(instance: { [propertySymbol]: Property }) {
-    return instance[propertySymbol] || (instance[propertySymbol] = {});
+    const property = instance[propertySymbol] || (instance[propertySymbol] = {});
+
+    if (property.changesSubject === undefined) {
+      property.changesSubject = new ReplaySubject();
+      property.changesObservable = property.changesSubject.asObservable();
+    }
+
+    return property;
   }
 
   function getChangesObservable(this: any) {
-    const property = getProperty(this);
-
-    if (property.changesObservable === undefined) {
-      property.changesObservable = new Observable(observer => {
-        if (property.hasValue) {
-          observer.next(property.currentValue);
-        }
-
-        property.emitValue = value => {
-          observer.next(value);
-        };
-
-        return () => {
-          property.emitValue = undefined;
-        };
-      });
-    }
-
-    return property.changesObservable;
+    return getProperty(this).changesObservable;
   }
 
   function getValue(this: any) {
-    const property = getProperty(this);
-
-    return property.hasValue ? property.currentValue : undefined;
+    return getProperty(this).currentValue;
   }
 
   function setValue(this: any, value: any) {
     const property = getProperty(this);
     const oldValue = property.currentValue;
 
-    property.hasValue = true;
     property.currentValue = value;
 
-    if (property.emitValue && value !== oldValue) {
-      property.emitValue(value);
+    if (value !== oldValue) {
+      property.changesSubject.next(value);
     }
   }
 }
