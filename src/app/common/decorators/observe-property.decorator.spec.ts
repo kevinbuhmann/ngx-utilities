@@ -75,6 +75,18 @@ describe('ObserveProperty', () => {
       expect(await firstNameChangesPromise).toEqual('Christa');
     });
 
+    it('should emit property changes to multiple observers', async () => {
+      const person = new Person();
+
+      const firstNameChangesPromise1 = person.firstNameChanges.pipe(first()).toPromise();
+      const firstNameChangesPromise2 = person.firstNameChanges.pipe(first()).toPromise();
+
+      person.firstName = 'Christa';
+
+      expect(await firstNameChangesPromise1).toEqual('Christa');
+      expect(await firstNameChangesPromise2).toEqual('Christa');
+    });
+
     it('should emit current property value and changes', async () => {
       const person = new Person();
       person.firstName = 'Hugo';
