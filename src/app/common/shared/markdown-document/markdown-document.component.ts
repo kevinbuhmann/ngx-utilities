@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { ObserveProperty } from './../../decorators/observe-property.decorator';
+import { ObserveProperty } from './../../../../../projects/observe-property/src/public_api';
 import { MarkdownDocumentService, MarkdownDocumentType } from './markdown-document.service';
 
 @Component({
