@@ -140,6 +140,21 @@
           }
         }
       }
+    },
+    "@ngx-utilities/observe-property": {
+      "root": "./projects/observe-property",
+      "sourceRoot": "./projects/observe-property/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "./projects/tsconfig.lib.json",
+            "project": "./projects/observe-property/ng-package.json"
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-utilities-app-client"

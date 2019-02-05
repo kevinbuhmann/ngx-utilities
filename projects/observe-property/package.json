@@ -1,0 +1,11 @@
+{
+  "name": "@ngx-utilities/observe-property",
+  "version": "0.0.1",
+  "repository": "https://github.com/kevinphelps/ngx-utilities",
+  "author": "Kevin Phelps",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "rxjs": ">=6.0.0"
+  }
+}

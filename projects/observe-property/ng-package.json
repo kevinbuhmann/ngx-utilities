@@ -1,0 +1,8 @@
+{
+  "$schema": "./../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "./../../dist/projects/observe-property",
+  "lib": {
+    "entryFile": "./src/public_api.ts",
+    "languageLevel": ["dom", "es2017"]
+  }
+}

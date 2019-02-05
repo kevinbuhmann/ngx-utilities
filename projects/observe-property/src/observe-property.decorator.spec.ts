@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { takeToArray } from './../helpers/rxjs-operators';
+import { takeToArray } from './../../../src/app/common/helpers/rxjs-operators';
 import { ObserveProperty } from './observe-property.decorator';
 
 class Person {
