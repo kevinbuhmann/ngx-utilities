@@ -111,5 +111,17 @@ describe('ObserveProperty', () => {
       expect(await firstNameChangesPromise).toEqual(['Jena', 'Glynda']);
       expect(await lastNameChangesPromise).toEqual(['Terry', 'Hoffman']);
     });
+
+    it('should not emit the same property value twice', async () => {
+      const person = new Person();
+
+      const firstNameChangesPromise = person.firstNameChanges.pipe(takeToArray(2)).toPromise();
+
+      person.firstName = 'Christa';
+      person.firstName = 'Christa';
+      person.firstName = 'Glynda';
+
+      expect(await firstNameChangesPromise).toEqual(['Christa', 'Glynda']);
+    });
   });
 });

@@ -49,11 +49,12 @@ export function ObserveProperty<T>(observedPropertyKey: keyof T) {
 
   function setValue(this: any, value: any) {
     const property = getProperty(this);
+    const oldValue = property.currentValue;
 
     property.hasValue = true;
     property.currentValue = value;
 
-    if (property.emitValue) {
+    if (property.emitValue && value !== oldValue) {
       property.emitValue(value);
     }
   }
