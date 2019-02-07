@@ -1,6 +1,7 @@
 import { Observable, ReplaySubject } from 'rxjs';
 
 interface Property {
+  hasValue?: boolean;
   currentValue?: any;
   changesObservable?: Observable<any>;
   changesSubject?: ReplaySubject<any>;
@@ -16,6 +17,10 @@ export function ObserveProperty<T>(observedPropertyKey: keyof T) {
 
   function getProperty(instance: { [propertySymbol]: Property }) {
     const property = instance[propertySymbol] || (instance[propertySymbol] = {});
+
+    if (property.hasValue === undefined) {
+      property.hasValue = false;
+    }
 
     if (property.changesSubject === undefined) {
       property.changesSubject = new ReplaySubject();
@@ -36,10 +41,12 @@ export function ObserveProperty<T>(observedPropertyKey: keyof T) {
   function setValue(this: any, value: any) {
     const property = getProperty(this);
     const oldValue = property.currentValue;
+    const firstChange = !property.hasValue;
 
+    property.hasValue = true;
     property.currentValue = value;
 
-    if (value !== oldValue) {
+    if (firstChange || value !== oldValue) {
       property.changesSubject.next(value);
     }
   }

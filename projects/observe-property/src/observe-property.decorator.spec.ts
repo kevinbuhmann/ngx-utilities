@@ -75,6 +75,16 @@ describe('ObserveProperty', () => {
       expect(await firstNameChangesPromise).toEqual('Christa');
     });
 
+    it('should emit undefined if property explicitly set to undefined', async () => {
+      const person = new Person();
+
+      const firstNameChangesPromise = person.firstNameChanges.pipe(first()).toPromise();
+
+      person.firstName = undefined;
+
+      expect(await firstNameChangesPromise).toBeUndefined();
+    });
+
     it('should emit property changes to multiple observers', async () => {
       const person = new Person();
 
