@@ -8,6 +8,15 @@ import { MarkdownDocumentComponent } from './markdown-document.component';
 import { MarkdownDocumentService, MarkdownDocumentType } from './markdown-document.service';
 
 @Pipe({
+  name: 'ngxTransferState'
+})
+export class MockNgxTransferStatePipe implements PipeTransform {
+  transform(value: any) {
+    return value; // we don't need to transfer state in tests
+  }
+}
+
+@Pipe({
   name: 'appMarkdownToHtml'
 })
 export class MockMarkdownToHtmlPipe implements PipeTransform {
@@ -25,7 +34,7 @@ describe('MarkdownDocumentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxIfElseLoadingModule],
-      declarations: [MockMarkdownToHtmlPipe, MarkdownDocumentComponent],
+      declarations: [MockNgxTransferStatePipe, MockMarkdownToHtmlPipe, MarkdownDocumentComponent],
       providers: [{ provide: MarkdownDocumentService, useValue: mockMockMarkdownDocumentService }]
     });
 

@@ -4,7 +4,6 @@ import { of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { environment } from './../../../../environments/environment';
-import { TransferStateService } from './../../services/transfer-state.service';
 
 export enum MarkdownDocumentType {
   README = 'README.md',
@@ -13,15 +12,13 @@ export enum MarkdownDocumentType {
 
 @Injectable({ providedIn: 'root' })
 export class MarkdownDocumentService {
-  constructor(private readonly httpClient: HttpClient, private readonly transferStateService: TransferStateService) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   getDocument(project: string, documentType: MarkdownDocumentType) {
-    const getDocument = this.httpClient.get(`${environment.appUrl}/projects/${project}/${documentType}`, { responseType: 'text' }).pipe(
+    return this.httpClient.get(`${environment.appUrl}/projects/${project}/${documentType}`, { responseType: 'text' }).pipe(
       catchError(error => (error instanceof HttpErrorResponse && error.status === 404 ? of(undefined) : throwError(error))),
       map(document => (document ? removeFirstHeader(document, project, documentType) : undefined))
     );
-
-    return this.transferStateService.transfer(`${project}/${documentType}`, getDocument);
   }
 }
 

@@ -12,6 +12,7 @@ import { MarkdownDocumentService, MarkdownDocumentType } from './markdown-docume
 export class MarkdownDocumentComponent {
   @Input() project: string;
   @Input() documentType: MarkdownDocumentType;
+  @Input() transferStateKey: string;
 
   @ObserveProperty('project') private readonly projectChanges: Observable<string>;
   @ObserveProperty('documentType') private readonly documentTypeChanges: Observable<MarkdownDocumentType>;

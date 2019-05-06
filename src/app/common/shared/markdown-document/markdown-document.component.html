@@ -1,3 +1,3 @@
 <ng-container *ngIf="project && documentType">
-  <div *ngxIfElseLoading="markdownContent | async; let markdownContent" [innerHTML]="markdownContent | appMarkdownToHtml"></div>
+  <div *ngxIfElseLoading="markdownContent | ngxTransferState:transferStateKey | async; let markdownContent" [innerHTML]="markdownContent | appMarkdownToHtml"></div>
 </ng-container>

@@ -155,6 +155,21 @@
           }
         }
       }
+    },
+    "@ngx-utilities/ngx-transfer-state": {
+      "root": "./projects/ngx-transfer-state",
+      "sourceRoot": "./projects/ngx-transfer-state/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "./projects/tsconfig.lib.json",
+            "project": "./projects/ngx-transfer-state/ng-package.json"
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-utilities-app-client"
