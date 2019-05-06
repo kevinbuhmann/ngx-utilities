@@ -1,0 +1,12 @@
+{
+  "name": "@ngx-utilities/ngx-transfer-state",
+  "version": "0.0.1-dev.1",
+  "repository": "https://github.com/kevinphelps/ngx-utilities",
+  "author": "Kevin Phelps",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "@angular/core": "^7.0.0",
+    "@angular/common": "^7.0.0"
+  }
+}

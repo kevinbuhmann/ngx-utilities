@@ -1,15 +1,18 @@
-import { Injectable, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { createStubInstance } from 'sinon';
 
 import { NgxIfElseLoadingModule } from './../../../../../projects/ngx-if-else-loading/src/public_api';
 import { MarkdownDocumentComponent } from './markdown-document.component';
 import { MarkdownDocumentService, MarkdownDocumentType } from './markdown-document.service';
 
-@Injectable()
-class MockMarkdownDocumentService implements Partial<MarkdownDocumentService> {
-  getDocument(project: string, documentType: MarkdownDocumentType) {
-    return of(`${project} ${documentType}`);
+@Pipe({
+  name: 'ngxTransferState'
+})
+export class MockNgxTransferStatePipe implements PipeTransform {
+  transform(value: any) {
+    return value; // we don't need to transfer state in tests
   }
 }
 
@@ -23,20 +26,24 @@ export class MockMarkdownToHtmlPipe implements PipeTransform {
 }
 
 describe('MarkdownDocumentComponent', () => {
+  const mockMockMarkdownDocumentService = createStubInstance(MarkdownDocumentService);
+
   let fixture: ComponentFixture<MarkdownDocumentComponent>;
   let nativeElement: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxIfElseLoadingModule],
-      declarations: [MockMarkdownToHtmlPipe, MarkdownDocumentComponent],
-      providers: [{ provide: MarkdownDocumentService, useClass: MockMarkdownDocumentService }]
+      declarations: [MockNgxTransferStatePipe, MockMarkdownToHtmlPipe, MarkdownDocumentComponent],
+      providers: [{ provide: MarkdownDocumentService, useValue: mockMockMarkdownDocumentService }]
     });
 
     fixture = TestBed.createComponent(MarkdownDocumentComponent);
     nativeElement = fixture.nativeElement;
 
     fixture.detectChanges();
+
+    spyOn(mockMockMarkdownDocumentService, 'getDocument').and.callFake(fakeGetDocument);
   });
 
   it('should be empty if the project and document type is not given', () => {
@@ -81,3 +88,7 @@ describe('MarkdownDocumentComponent', () => {
     expect(nativeElement.textContent.trim()).toBe('markdownToHtml(test-project-2 CHANGELOG.md)');
   });
 });
+
+function fakeGetDocument(project: string, documentType: MarkdownDocumentType) {
+  return of(`${project} ${documentType}`);
+}
