@@ -19,7 +19,7 @@ export class MarkdownDocumentComponent {
   readonly markdownContent: Observable<string>;
 
   constructor(private readonly markdownDocumentService: MarkdownDocumentService) {
-    this.markdownContent = combineLatest(this.projectChanges, this.documentTypeChanges).pipe(
+    this.markdownContent = combineLatest([this.projectChanges, this.documentTypeChanges]).pipe(
       switchMap(([project, documentType]) => this.markdownDocumentService.getDocument(project, documentType))
     );
   }
