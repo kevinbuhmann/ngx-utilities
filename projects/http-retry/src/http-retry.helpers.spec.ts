@@ -73,8 +73,10 @@ describe('httpRequestRetry', () => {
     httpClient
       .get('/api/people')
       .pipe(httpRequestRetry([retryStrategy]))
-      .subscribe(undefined, error => {
-        expect(error.status).toBe(502);
+      .subscribe({
+        error: error => {
+          expect(error.status).toBe(502);
+        }
       });
 
     (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 502, statusText: 'Bad Gateway' });
@@ -148,8 +150,10 @@ describe('httpRequestRetry', () => {
     httpClient
       .get('/api/people')
       .pipe(httpRequestRetry([retryStrategy1, retryStrategy2]))
-      .subscribe(undefined, error => {
-        expect(error.status).toBe(0);
+      .subscribe({
+        error: error => {
+          expect(error.status).toBe(0);
+        }
       });
 
     (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 0, statusText: 'Network Error' });
@@ -175,8 +179,10 @@ describe('httpRequestRetry', () => {
     httpClient
       .get('/api/people')
       .pipe(httpRequestRetry([retryStrategy1, retryStrategy2]))
-      .subscribe(undefined, error => {
-        expect(error.status).toBe(500);
+      .subscribe({
+        error: error => {
+          expect(error.status).toBe(500);
+        }
       });
 
     (await expectOneRequest(httpMock, '/api/people')).flush(null, { status: 502, statusText: 'Bad Gateway' });
