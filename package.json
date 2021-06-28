@@ -31,7 +31,7 @@
     "express": "4.16.4",
     "marked": "0.5.2",
     "morgan": "1.9.1",
-    "prismjs": "1.15.0",
+    "prismjs": "1.24.0",
     "reflect-metadata": "0.1.12",
     "rx-routes": "0.4.0",
     "rxjs": "6.3.3",
