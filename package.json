@@ -28,7 +28,7 @@
     "@ngx-lite/nav-drawer": "0.3.5",
     "@ngx-lite/tabs": "0.2.7",
     "core-js": "2.5.7",
-    "express": "4.16.4",
+    "express": "4.17.3",
     "marked": "0.5.2",
     "morgan": "1.9.1",
     "prismjs": "1.15.0",
